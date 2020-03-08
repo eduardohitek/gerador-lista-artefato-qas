@@ -14,7 +14,8 @@ module.exports = function (app) {
                 listaProjeto: req.body.listaProjeto,
                 mostrarDeletados: req.body.mostrarDeletados,
                 mostrarRenomeados: req.body.mostrarRenomeados,
-                mostrarNumModificacao: req.body.mostrarNumModificacao
+                mostrarNumModificacao: req.body.mostrarNumModificacao,
+                mostrarCommitsLocais: req.body.mostrarCommitsLocais
             })
 
             const gerador = require('../lib/gerador-ofmanager')(params)
