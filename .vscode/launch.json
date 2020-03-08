@@ -16,15 +16,30 @@
             // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
             "type": "node",
             "request": "launch",
-            "name": "jest",
+            "name": "jest gerador-qas",
             "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
             "args": [
                 "-i",
                 "--runInBand",
                 "--verbose",
-                "test/gerador.test.js"
+                "test/gerador-qas.test.js"
             ],
             "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            // node app --diretorio=/home/foo/Documents --projeto=foo-estatico,foo-api --autor=diegomdrs --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+            "name": "jest gerador-ofmanager",
+            "type": "node",
+            "request": "launch",
+            "runtimeArgs": [
+                "--inspect-brk",
+                "${workspaceRoot}/node_modules/.bin/jest",
+                "--runInBand",
+                "test/gerador-ofmanager.test.js"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "port": 9229
         },
         {
             // jest --runInBand --verbose test/gerador.test.js
