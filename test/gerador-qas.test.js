@@ -12,7 +12,7 @@ describe('test gerais', () => {
 
     beforeEach(async () => {
 
-        gerador = require('../lib/gerador')
+        gerador = require('../lib/gerador-qas')
         gitUtil = await new GeradorTestUtil(nomeProjeto, autor)
 
         params = new Param({
@@ -763,15 +763,15 @@ describe('test gerais', () => {
         expect(lista[9].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[9].listaArtefatoSaida[1].nomeArtefato).toBe('foo/karma.conf.js')
 
-        gitFoo.removerDiretorioProjeto()
-        gitBar.removerDiretorioProjeto()
+        // gitFoo.removerDiretorioProjeto()
+        // gitBar.removerDiretorioProjeto()
     })
 
-    afterEach(async () => {
-        gitUtil.removerDiretorioProjeto()
-    })
+    // afterEach(async () => {
+    //     gitUtil.removerDiretorioProjeto()
+    // })
 
-    afterAll(async () => {
-        gitUtil.removerDiretorioTest()
-    })
+    // afterAll(async () => {
+    //     gitUtil.removerDiretorioTest()
+    // })
 })

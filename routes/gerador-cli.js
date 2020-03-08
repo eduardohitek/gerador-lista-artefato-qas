@@ -24,7 +24,7 @@ module.exports = async function (commander) {
                 mostrarNumModificacao: commander.mostrarNumModificacao
             })
 
-            const gerador = require('../lib/gerador')(params)
+            const gerador = require('../lib/gerador-qas')(params)
             const listaSaida = await gerador.gerarListaArtefato()
             const printer = require('../lib/printer')(params, listaSaida)
 
