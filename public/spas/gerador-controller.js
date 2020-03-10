@@ -214,7 +214,8 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
             listaProjeto: [],
             listaTarefa: [],
             mostrarDeletados: false,
-            mostrarRenomeados: false
+            mostrarRenomeados: false,
+            mostrarCommitsLocais: true
         }
 
         delete vm.listaSaida
