@@ -18,7 +18,9 @@ module.exports = function (app) {
                 mostrarCommitsLocais: req.body.mostrarCommitsLocais
             })
 
-            const gerador = require('../lib/gerador-ofmanager')(params)
+            const gerador = require('../lib/gerador-qas')(params)
+            // const gerador = require('../lib/gerador-ofmanager')(params)
+
             const listaSaida = await gerador.gerarListaArtefato()
 
             resp.json(listaSaida)
