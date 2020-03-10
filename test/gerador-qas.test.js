@@ -144,7 +144,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
-        expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
         expect(lista[1].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
 
@@ -730,7 +730,7 @@ describe('test gerais', () => {
         expect(lista[5].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[5].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
         expect(lista[5].listaArtefatoSaida[0].nomeArtefato).toBe('bar/quuz-controller.html')
-        expect(lista[5].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('bar/quy-controller.html')
+        expect(lista[5].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('bar/qux-controller.html')
         expect(lista[5].listaArtefatoSaida[0].nomeNovoArtefato).toBe('bar/quuz-controller.html')
 
         expect(lista[7].listaNumTarefaSaida).toHaveLength(1)
