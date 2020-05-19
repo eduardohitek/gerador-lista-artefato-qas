@@ -101,7 +101,7 @@ describe('test gerais', () => {
         })
 
         expect.assertions(1);
-        return expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
+        expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
             new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
     })
 
