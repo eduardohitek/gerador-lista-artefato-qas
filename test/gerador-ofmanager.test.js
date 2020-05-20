@@ -14,18 +14,6 @@ describe('test gerais', () => {
 
         gerador = require('../lib/gerador-ofmanager')
         gitUtil = await new GeradorTestUtil(nomeProjeto, autor)
-
-        params = new Param({
-            autor: "fulano",
-            listaProjeto: [
-                gitUtil.obterCaminhoProjeto()
-            ],
-            listaTarefa: ["1111111", "2222222"],
-            mostrarNumModificacao: true,
-            mostrarCommitsLocais: true,
-            mostrarDeletados: true,
-            mostrarRenomeados: true
-        })
     })
 
     // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
