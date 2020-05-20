@@ -40,7 +40,7 @@ describe('test gerais', () => {
             listaProjeto: [
                 gitFoo.obterCaminhoProjeto()
             ],
-            listaTarefa: ["1111111"],
+            listaTarefa: ["1111111,2222222"],
             mostrarNumModificacao: true,
             mostrarCommitsLocais: true,
             mostrarDeletados: true,
@@ -48,7 +48,9 @@ describe('test gerais', () => {
         })
 
         await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/foo-controller.js', TIPO_MODIFICACAO.ADDED)
-        await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/bar-controller.js', TIPO_MODIFICACAO.MODIFIED)
+        await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/bar-controller.js', TIPO_MODIFICACAO.ADDED)
+
+        await gitFoo.manipularArquivoComCommit('2222222', 'src/app/spas/bar-controller.js', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
 
