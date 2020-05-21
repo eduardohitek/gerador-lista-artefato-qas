@@ -5,13 +5,11 @@ const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 
 const autor = 'fulano'
 
-let gitUtil = {}
-
 describe('test gerais', () => {
 
     beforeEach(async () => {
 
-        gitUtil = await new GeradorTestUtil('','')
+        const gitUtil = await new GeradorTestUtil('', autor)
         gitUtil.removerDiretorioTest();
     })
 
@@ -39,7 +37,7 @@ describe('test gerais', () => {
                 gitFoo.obterCaminhoProjeto(),
                 gitBar.obterCaminhoProjeto()
             ],
-            listaTarefa: ["1111111","2222222"],
+            listaTarefa: ["1111111", "2222222"],
             mostrarNumModificacao: true,
             mostrarCommitsLocais: true,
             mostrarDeletados: true,
