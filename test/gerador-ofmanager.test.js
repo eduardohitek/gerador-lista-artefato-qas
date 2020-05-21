@@ -6,14 +6,14 @@ const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 const nomeProjeto = 'foo'
 const autor = 'fulano'
 
-let gitUtil, gerador, params = {}
+let gitUtil = {}
 
 describe('test gerais', () => {
 
     beforeEach(async () => {
 
-        gerador = require('../lib/gerador-ofmanager')
-        gitUtil = await new GeradorTestUtil(nomeProjeto, autor)
+        gitUtil = await new GeradorTestUtil('','')
+        gitUtil.removerDiretorioTest();
     })
 
     // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
@@ -23,26 +23,25 @@ describe('test gerais', () => {
 
         const gitFoo = await new GeradorTestUtil(nomeProjetoFoo, autor)
 
+        await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/foo-controller.js', TIPO_MODIFICACAO.ADDED)
+        await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/bar-controller.js', TIPO_MODIFICACAO.ADDED)
+
+        await gitFoo.manipularArquivoComCommit('2222222', 'src/app/spas/bar-controller.js', TIPO_MODIFICACAO.MODIFIED)
+
         const params = new Param({
             autor: "fulano",
             listaProjeto: [
                 gitFoo.obterCaminhoProjeto()
             ],
-            listaTarefa: ["1111111,2222222"],
+            listaTarefa: ["1111111","2222222"],
             mostrarNumModificacao: true,
             mostrarCommitsLocais: true,
             mostrarDeletados: true,
             mostrarRenomeados: true
         })
 
-        await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/foo-controller.js', TIPO_MODIFICACAO.ADDED)
-        await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/bar-controller.js', TIPO_MODIFICACAO.ADDED)
-
-        await gitFoo.manipularArquivoComCommit('2222222', 'src/app/spas/bar-controller.js', TIPO_MODIFICACAO.MODIFIED)
-
+        const gerador = require('../lib/gerador-ofmanager')
         const lista = await gerador(params).gerarListaArtefato()
-
-        // gitFoo.removerDiretorioProjeto()
     })
 
     // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
