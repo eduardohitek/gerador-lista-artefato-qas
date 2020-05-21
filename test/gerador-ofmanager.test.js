@@ -10,7 +10,6 @@ let gitUtil, gerador = {}
 describe('test gerais', () => {
 
     beforeEach(async () => {
-
         gerador = require('../lib/gerador-ofmanager')
         gitUtil = await new GeradorTestUtil('', autor)
         gitUtil.removerDiretorioTest()
@@ -26,8 +25,8 @@ describe('test gerais', () => {
         await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/foo-controller.js', TIPO_MODIFICACAO.ADDED)
         await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/foo-controller.js', TIPO_MODIFICACAO.MODIFIED)
 
-        await gitFoo.manipularArquivoComCommit('1111111', 
-            { origem: 'src/app/spas/foo-controller.js', destino: 'src/app/spas/bar-controller.js' }, TIPO_MODIFICACAO.RENAMED)
+        await gitFoo.manipularArquivoComCommit('1111111',
+           { origem: 'src/app/spas/foo-controller.js', destino: 'src/app/spas/bar-controller.js' }, TIPO_MODIFICACAO.RENAMED)
 
         const params = new Param({
             autor: "fulano",
@@ -42,9 +41,19 @@ describe('test gerais', () => {
         })
 
         const listaSaida = await gerador(params).gerarListaArtefato()
-        const printer = require('../lib/printer')(params, listaSaida)
+        const printer = require('../lib/printer-ofmanager')(params, listaSaida)
 
         printer.imprimirListaSaida(listaSaida)
+    })
+})
+
+xdescribe('test gerais', () => {
+
+    beforeEach(async () => {
+
+        gerador = require('../lib/gerador-ofmanager')
+        gitUtil = await new GeradorTestUtil('', autor)
+        gitUtil.removerDiretorioTest()
     })
 
     // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
