@@ -59,41 +59,32 @@ describe('test gerais', () => {
         )
 
         await gitUtil.manipularArquivoComCommit('2222222',
-            'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
+            'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)          
 
         const lista = await gerador(params).gerarListaArtefato()
-        const printer = require('../lib/printer-ofmanager')(params, lista)
-
-        printer.imprimirListaSaida()
 
         expect(lista).toHaveLength(2)
 
-        expect(lista[0].numTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].numTarefaSaida).toBe('1111111')
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
 
-        // expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
-        // expect(lista[1].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
 
-        // expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        // expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
-        // expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
-        // expect(lista[1].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[1].numTarefaSaida).toBe('2222222')
 
-        // expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[2].listaNumTarefaSaida[0]).toBe('2222222')
-        // expect(lista[2].listaArtefatoSaida).toHaveLength(1)
-
-        // expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
     })
 
-    xit('teste de listagem de artefatos com projeto inválido', () => {
+    it('teste de listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
             autor: "fulano",
