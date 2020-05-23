@@ -28,7 +28,7 @@ describe('test gerais', () => {
         })
     })
 
-    it('teste do modulo Param com parametros repetidos', () => {
+    xit('teste do modulo Param com parametros repetidos', () => {
 
         const params = new Param({
             autor: "fulano",
@@ -43,7 +43,7 @@ describe('test gerais', () => {
         expect(params.listaProjeto[0]).toBe('bar')
     });
 
-    it('teste de listagem de artefatos renomeados', async () => {
+    xit('teste de listagem de artefatos renomeados', async () => {
 
         await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'arquivoFoo.txt' }
@@ -86,7 +86,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
     })
 
-    it('teste de listagem de artefatos com projeto inválido', () => {
+    xit('teste de listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
             autor: "fulano",
@@ -99,7 +99,7 @@ describe('test gerais', () => {
             new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
     })
 
-    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -165,9 +165,6 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        const printer = require('../lib/printer-ofmanager')(params, lista)
-        printer.imprimirListaSaida()
-
         expect(lista).toHaveLength(1)
 
         expect(lista[0].numTarefaSaida).toBe('1111111')
@@ -197,6 +194,9 @@ describe('test gerais', () => {
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
+
+        const printer = require('../lib/printer-ofmanager')({mostrarNumModificacao: true}, lista)
+        printer.imprimirListaSaida()
 
         expect(lista).toHaveLength(2)
 
