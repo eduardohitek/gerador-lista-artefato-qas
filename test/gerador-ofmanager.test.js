@@ -137,7 +137,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, R, D e A novamente', async () => {
+    it('teste de listagem de artefato A, R, D e A novamente', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -164,27 +164,22 @@ describe('test gerais', () => {
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
-        
+
         const printer = require('../lib/printer-ofmanager')(params, lista)
         printer.imprimirListaSaida()
 
-        expect(lista).toHaveLength(2)
+        expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
-        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[0].numTarefaSaida).toBe('1111111')
+        expect(lista[0].listaArtefatoSaida).toHaveLength(2)
 
-        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
-        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
-
-        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
-        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
     xit('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
@@ -769,45 +764,5 @@ describe('test gerais', () => {
 
         gitFoo.removerDiretorioProjeto()
         gitBar.removerDiretorioProjeto()
-    })
-})
-
-xdescribe('test gerais', () => {
-
-    beforeEach(async () => {
-        gerador = require('../lib/gerador-ofmanager')
-        gitUtil = await new GeradorTestUtil('', autor)
-        gitUtil.removerDiretorioTest()
-    })
-
-    // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
-    xit('teste foo', async () => {
-
-        const nomeProjetoFoo = 'foo'
-
-        const gitFoo = await new GeradorTestUtil(nomeProjetoFoo, autor)
-
-        await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/foo-controller.js', TIPO_MODIFICACAO.ADDED)
-        await gitFoo.manipularArquivoComCommit('1111111', 'src/app/spas/foo-controller.js', TIPO_MODIFICACAO.MODIFIED)
-
-        await gitFoo.manipularArquivoComCommit('1111111',
-            { origem: 'src/app/spas/foo-controller.js', destino: 'src/app/spas/bar-controller.js' }, TIPO_MODIFICACAO.RENAMED)
-
-        const params = new Param({
-            autor: "fulano",
-            listaProjeto: [
-                gitFoo.obterCaminhoProjeto()
-            ],
-            listaTarefa: ["1111111", "2222222"],
-            mostrarNumModificacao: true,
-            mostrarCommitsLocais: true,
-            mostrarDeletados: true,
-            mostrarRenomeados: true
-        })
-
-        const listaSaida = await gerador(params).gerarListaArtefato()
-        const printer = require('../lib/printer')(params, listaSaida)
-
-        printer.imprimirListaSaida()
     })
 })
