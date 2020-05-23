@@ -66,6 +66,7 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(2)
 
         expect(lista[0].numTarefaSaida).toBe('1111111')
+        expect(lista[0].listaArtefatoSaida).toHaveLength(2)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
@@ -78,6 +79,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
 
         expect(lista[1].numTarefaSaida).toBe('2222222')
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
@@ -118,29 +120,21 @@ describe('test gerais', () => {
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
-        const printer = require('../lib/printer-ofmanager')(params, lista)
 
-        printer.imprimirListaSaida()
+        expect(lista).toHaveLength(1)
 
-        // expect(lista).toHaveLength(2)
+        expect(lista[0].numTarefaSaida).toBe('1111111')
+        expect(lista[0].listaArtefatoSaida).toHaveLength(2)
 
-        // expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
-        // expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
-        // expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-        // expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
-
-        // expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
-        // expect(lista[1].listaArtefatoSaida).toHaveLength(1)
-
-        // expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        // expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-        // expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
-        // expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
-        // expect(lista[1].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
 
     xit('teste de listagem de artefato A, R, D e A novamente', async () => {
@@ -170,6 +164,9 @@ describe('test gerais', () => {
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
+        
+        const printer = require('../lib/printer-ofmanager')(params, lista)
+        printer.imprimirListaSaida()
 
         expect(lista).toHaveLength(2)
 
