@@ -176,8 +176,7 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        const printer = require('../lib/printer')({mostrarNumModificacao: true}, lista)
-        printer.imprimirListaSaida()
+        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
         expect(lista).toHaveLength(2)
 

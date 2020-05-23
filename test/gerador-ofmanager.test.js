@@ -165,6 +165,8 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
+        require('../lib/printer-ofmanager')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
+
         expect(lista).toHaveLength(1)
 
         expect(lista[0].numTarefaSaida).toBe('1111111')
