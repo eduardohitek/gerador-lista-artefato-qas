@@ -299,7 +299,7 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(0)
     })
 
-    xit('teste de listagem de artefatos criados em branches diferentes', async () => {
+    it('teste de listagem de artefatos criados em branches diferentes', async () => {
 
         await gitUtil.checkoutBranch('branchFoo')
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -313,9 +313,7 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
-
+        expect(lista[0].numTarefaSaida).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(2)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)

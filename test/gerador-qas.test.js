@@ -324,7 +324,7 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(0)
     })
 
-    xit('teste de listagem de artefatos criados em branches diferentes', async () => {
+    it('teste de listagem de artefatos criados em branches diferentes', async () => {
 
         await gitUtil.checkoutBranch('branchFoo')
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
