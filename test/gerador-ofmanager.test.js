@@ -126,17 +126,23 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(1)
 
         expect(lista[0].numTarefaSaida).toBe('1111111')
-        expect(lista[0].listaArtefatoSaida).toHaveLength(2)
+        expect(lista[0].listaArtefatoSaida).toHaveLength(3)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
         expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
         expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
-        expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
+
+        expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[2].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[2].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
 
     xit('teste de listagem de artefato A, R, D e A novamente', async () => {
