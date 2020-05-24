@@ -1,0 +1,70 @@
+[
+    {
+        "nomeProjeto": "foo",
+        "nomeArquivo": "foo/arquivoFoo.txt",
+        "commit": {
+            "numeroTarefa": "1111111",
+            "tipoAlteracao": "A"
+        }
+    },
+    {
+        "nomeProjeto": "foo",
+        "nomeArquivo": "foo/arquivoFoo.txt",
+        "commit": {
+            "numeroTarefa": "1111111",
+            "tipoAlteracao": "M"
+        }
+    },
+    {
+        "nomeProjeto": "foo",
+        "nomeArquivo": "foo/arquivoFoo.txt",
+        "commit": {
+            "numeroTarefa": "1111111",
+            "tipoAlteracao": "R",
+            "nomeAntigoArquivo": "foo/arquivoFoo.txt",
+            "nomeNovoArquivo": "foo/arquivoQux.txt"
+        }
+    },
+    {
+        "nomeProjeto": "foo",
+        "nomeArquivo": "foo/arquivoQux.txt",
+        "commit": {
+            "numeroTarefa": "1111111",
+            "tipoAlteracao": "M"
+        }
+    },
+    {
+        "nomeProjeto": "foo",
+        "nomeArquivo": "foo/arquivoQux.txt",
+        "commit": {
+            "numeroTarefa": "1111111",
+            "tipoAlteracao": "R",
+            "nomeAntigoArquivo": "foo/arquivoQux.txt",
+            "nomeNovoArquivo": "foo/arquivoBar.txt"
+        }
+    },
+    {
+        "nomeProjeto": "foo",
+        "nomeArquivo": "foo/arquivoBar.txt",
+        "commit": {
+            "numeroTarefa": "1111111",
+            "tipoAlteracao": "M"
+        }
+    },
+    {
+        "nomeProjeto": "foo",
+        "nomeArquivo": "foo/arquivoBar.txt",
+        "commit": {
+            "numeroTarefa": "1111111",
+            "tipoAlteracao": "D"
+        }
+    },
+    {
+        "nomeProjeto": "foo",
+        "nomeArquivo": "foo/arquivoFoo.txt",
+        "commit": {
+            "numeroTarefa": "1111111",
+            "tipoAlteracao": "A"
+        }
+    }
+]
