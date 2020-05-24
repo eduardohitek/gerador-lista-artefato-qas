@@ -186,7 +186,7 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoFoo.txt')
 
         expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')

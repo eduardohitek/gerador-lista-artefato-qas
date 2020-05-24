@@ -178,7 +178,7 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoFoo.txt')
     })
 
     xit('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
