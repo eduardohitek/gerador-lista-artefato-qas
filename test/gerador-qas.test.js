@@ -203,7 +203,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
+    it('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
