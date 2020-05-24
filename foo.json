@@ -1,38 +1,58 @@
 [
     {
-        "nomeProjeto": "foo",
-        "nomeArquivo": "foo/arquivoBar.txt",
-        "commit": {
-            "numeroTarefa": "1111111",
-            "tipoAlteracao": "A"
-        }
+        "nomeArtefato": "foo/Gruntfile.js",
+        "tipoArtefato": {
+            "extensao": "js"
+        },
+        "tipoAlteracao": "M",
+        "numeroAlteracao": 2
     },
     {
-        "nomeProjeto": "foo",
-        "nomeArquivo": "foo/arquivoBar.txt",
-        "commit": {
-            "numeroTarefa": "1111111",
-            "tipoAlteracao": "R",
-            "nomeAntigoArquivo": "foo/arquivoFoo.txt",
-            "nomeNovoArquivo": "foo/arquivoQux.txt"
-        }
+        "nomeArtefato": "foo/src/app/spas/imovel/cadastro/alterar-imovel.tpl.html",
+        "tipoArtefato": {
+            "extensao": "html"
+        },
+        "tipoAlteracao": "M",
+        "numeroAlteracao": 1
     },
     {
-        "nomeProjeto": "foo",
-        "nomeArquivo": "foo/arquivoBar.txt",
-        "commit": {
-            "numeroTarefa": "1111111",
-            "tipoAlteracao": "R",
-            "nomeAntigoArquivo": "foo/arquivoQux.txt",
-            "nomeNovoArquivo": "foo/arquivoBar.txt"
-        }
+        "nomeArtefato": "foo/src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js",
+        "tipoArtefato": {
+            "extensao": "js"
+        },
+        "tipoAlteracao": "M",
+        "numeroAlteracao": 2
     },
     {
-        "nomeProjeto": "foo",
-        "nomeArquivo": "foo/arquivoFoo.txt",
-        "commit": {
-            "numeroTarefa": "1111111",
-            "tipoAlteracao": "A"
-        }
+        "nomeArtefato": "foo/src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html",
+        "tipoArtefato": {
+            "extensao": "html"
+        },
+        "tipoAlteracao": "M",
+        "numeroAlteracao": 2
+    },
+    {
+        "nomeArtefato": "foo/src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js",
+        "tipoArtefato": {
+            "extensao": "js"
+        },
+        "tipoAlteracao": "M",
+        "numeroAlteracao": 1
+    },
+    {
+        "nomeArtefato": "foo/spec/inclusao-foo-controllers-spec.js",
+        "tipoArtefato": {
+            "extensao": "js"
+        },
+        "tipoAlteracao": "M",
+        "numeroAlteracao": 1
+    },
+    {
+        "nomeArtefato": "foo/src/app/spas/inventario/bem-services.js",
+        "tipoArtefato": {
+            "extensao": "js"
+        },
+        "tipoAlteracao": "D",
+        "numeroAlteracao": 1
     }
 ]

@@ -1,5 +1,7 @@
 const SaidaVO = function () {
 
+    this.numTarefaSaida = ''
+
     this.listaNumTarefaSaida = []
     this.listaArtefatoSaida = []
 
