@@ -99,7 +99,7 @@ describe('test gerais', () => {
             new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
     })
 
-    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -120,8 +120,6 @@ describe('test gerais', () => {
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
-
-        require('../lib/printer-ofmanager')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
         expect(lista).toHaveLength(1)
 
@@ -145,7 +143,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[2].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, R, D e A novamente', async () => {
+    it('teste de listagem de artefato A, R, D e A novamente', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)

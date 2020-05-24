@@ -105,7 +105,7 @@ describe('test gerais', () => {
             new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
     })
 
-    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -156,7 +156,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, R, D e A novamente', async () => {
+    it('teste de listagem de artefato A, R, D e A novamente', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
