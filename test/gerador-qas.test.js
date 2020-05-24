@@ -151,7 +151,7 @@ describe('test gerais', () => {
 
         expect(lista[1].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[1].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
         expect(lista[1].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
         expect(lista[1].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
