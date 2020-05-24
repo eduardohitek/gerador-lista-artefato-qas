@@ -171,8 +171,6 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        require('../lib/printer-ofmanager')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
-
         expect(lista).toHaveLength(1)
 
         expect(lista[0].numTarefaSaida).toBe('1111111')
@@ -217,7 +215,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
+    it('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -237,9 +235,7 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
-
+        expect(lista[0].numTarefaSaida).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
