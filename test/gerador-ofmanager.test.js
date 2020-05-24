@@ -28,7 +28,7 @@ describe('test gerais', () => {
         })
     })
 
-    xit('teste do modulo Param com parametros repetidos', () => {
+    it('teste do modulo Param com parametros repetidos', () => {
 
         const params = new Param({
             autor: "fulano",
@@ -43,7 +43,7 @@ describe('test gerais', () => {
         expect(params.listaProjeto[0]).toBe('bar')
     });
 
-    xit('teste de listagem de artefatos renomeados', async () => {
+    it('teste de listagem de artefatos renomeados', async () => {
 
         await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'arquivoFoo.txt' }
@@ -74,7 +74,7 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoFoo.txt')
         expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
         expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
 
@@ -86,7 +86,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
     })
 
-    xit('teste de listagem de artefatos com projeto inválido', () => {
+    it('teste de listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
             autor: "fulano",
@@ -99,7 +99,7 @@ describe('test gerais', () => {
             new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
     })
 
-    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -173,18 +173,30 @@ describe('test gerais', () => {
 
         require('../lib/printer-ofmanager')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
-        // expect(lista).toHaveLength(1)
+        expect(lista).toHaveLength(1)
 
-        // expect(lista[0].numTarefaSaida).toBe('1111111')
-        // expect(lista[0].listaArtefatoSaida).toHaveLength(2)
+        expect(lista[0].numTarefaSaida).toBe('1111111')
+        expect(lista[0].listaArtefatoSaida).toHaveLength(4)
 
-        // expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
-        // expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
+        expect(lista[0].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoQux.txt') 
 
-        // expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-        // expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        // expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoFoo.txt')
+        expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
+        expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoBar.txt') 
+
+        expect(lista[0].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[0].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[2].nomeArtefato).toBe('foo/arquivoBar.txt')
+
+        expect(lista[0].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[3].nomeArtefato).toBe('foo/arquivoFoo.txt')
     })
 
     xit('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
@@ -202,9 +214,6 @@ describe('test gerais', () => {
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
-
-        const printer = require('../lib/printer-ofmanager')({mostrarNumModificacao: true}, lista)
-        printer.imprimirListaSaida()
 
         expect(lista).toHaveLength(2)
 
