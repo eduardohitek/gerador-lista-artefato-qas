@@ -266,7 +266,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
+    it('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
@@ -275,6 +275,8 @@ describe('test gerais', () => {
         params.mostrarDeletados = false
 
         const lista = await gerador(params).gerarListaArtefato()
+
+        require('../lib/printer-ofmanager')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
         expect(lista).toHaveLength(0)
     })
