@@ -306,6 +306,24 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(0)
     })
 
+    it('teste de listagem de artefato A, M, R, D SEM opção de mostrar deletados', async () => {
+
+        await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
+        await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
+        await gitUtil.manipularArquivoComCommit('1111111',
+            { origem: 'arquivoBar.txt', destino: 'arquivoFoo.txt' }, TIPO_MODIFICACAO.RENAMED)
+
+        await gitUtil.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.DELETED)
+
+        params.mostrarDeletados = false
+
+        const lista = await gerador(params).gerarListaArtefato()
+
+        require('../lib/printer-ofmanager')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
+
+        expect(lista).toHaveLength(0)
+    })
+
     xit('teste de listagem de artefatos criados em branches diferentes', async () => {
 
         await gitUtil.checkoutBranch('branchFoo')
