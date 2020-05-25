@@ -23,6 +23,9 @@ const Artefato = function ({
 
     this.numeroAlteracao = 1
 
+    this.obterNomeArtefatoReverso = () =>
+        this.nomeArtefato.split('').reverse().join('')
+
     this.isTipoAlteracaoModificacao = () => this.tipoAlteracao === TIPO_MODIFICACAO.MODIFIED
     this.isTipoAlteracaoDelecao = () => this.tipoAlteracao === TIPO_MODIFICACAO.DELETED
     this.isTipoAlteracaoRenomear = () => this.tipoAlteracao === TIPO_MODIFICACAO.RENAMED

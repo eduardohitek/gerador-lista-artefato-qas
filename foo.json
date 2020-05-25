@@ -1,104 +1,106 @@
-{
-    "numeroTarefa": "1111111",
-    "listaArtefato": [
-        {
-            "nomeArtefato": "foo/Gruntfile.js",
-            "tipoArtefato": {
-                "extensao": "js",
-                "tipo": [
-                    {
-                        "regex": {}
-                    }
-                ]
+[
+    {
+        "numeroTarefa": "1111111",
+        "listaArtefato": [
+            {
+                "nomeArtefato": "foo/Gruntfile.js",
+                "tipoArtefato": {
+                    "extensao": "js",
+                    "tipo": [
+                        {
+                            "regex": {}
+                        }
+                    ]
+                },
+                "nomeProjeto": "foo",
+                "tipoAlteracao": "M",
+                "numeroAlteracao": 2
             },
-            "nomeProjeto": "foo",
-            "tipoAlteracao": "M",
-            "numeroAlteracao": 2
-        },
-        {
-            "nomeArtefato": "foo/src/app/spas/imovel/cadastro/alterar-imovel.tpl.html",
-            "tipoArtefato": {
-                "extensao": "html",
-                "tipo": [
-                    {
-                        "regex": {}
-                    }
-                ]
+            {
+                "nomeArtefato": "foo/src/app/spas/imovel/cadastro/alterar-imovel.tpl.html",
+                "tipoArtefato": {
+                    "extensao": "html",
+                    "tipo": [
+                        {
+                            "regex": {}
+                        }
+                    ]
+                },
+                "nomeProjeto": "foo",
+                "tipoAlteracao": "M",
+                "numeroAlteracao": 1
             },
-            "nomeProjeto": "foo",
-            "tipoAlteracao": "M",
-            "numeroAlteracao": 1
-        },
-        {
-            "nomeArtefato": "foo/src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js",
-            "tipoArtefato": {
-                "extensao": "js",
-                "tipo": [
-                    {
-                        "regex": {}
-                    }
-                ]
+            {
+                "nomeArtefato": "foo/src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js",
+                "tipoArtefato": {
+                    "extensao": "js",
+                    "tipo": [
+                        {
+                            "regex": {}
+                        }
+                    ]
+                },
+                "nomeProjeto": "foo",
+                "tipoAlteracao": "M",
+                "numeroAlteracao": 2
             },
-            "nomeProjeto": "foo",
-            "tipoAlteracao": "M",
-            "numeroAlteracao": 2
-        },
-        {
-            "nomeArtefato": "foo/src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html",
-            "tipoArtefato": {
-                "extensao": "html",
-                "tipo": [
-                    {
-                        "regex": {}
-                    }
-                ]
+            {
+                "nomeArtefato": "foo/src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html",
+                "tipoArtefato": {
+                    "extensao": "html",
+                    "tipo": [
+                        {
+                            "regex": {}
+                        }
+                    ]
+                },
+                "nomeProjeto": "foo",
+                "tipoAlteracao": "M",
+                "numeroAlteracao": 2
             },
-            "nomeProjeto": "foo",
-            "tipoAlteracao": "M",
-            "numeroAlteracao": 2
-        },
-        {
-            "nomeArtefato": "foo/src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js",
-            "tipoArtefato": {
-                "extensao": "js",
-                "tipo": [
-                    {
-                        "regex": {}
-                    }
-                ]
+            {
+                "nomeArtefato": "foo/src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js",
+                "tipoArtefato": {
+                    "extensao": "js",
+                    "tipo": [
+                        {
+                            "regex": {}
+                        }
+                    ]
+                },
+                "nomeProjeto": "foo",
+                "tipoAlteracao": "M",
+                "numeroAlteracao": 1
             },
-            "nomeProjeto": "foo",
-            "tipoAlteracao": "M",
-            "numeroAlteracao": 1
-        },
-        {
-            "nomeArtefato": "foo/spec/inclusao-foo-controllers-spec.js",
-            "tipoArtefato": {
-                "extensao": "js",
-                "tipo": [
-                    {
-                        "regex": {}
-                    }
-                ]
+            {
+                "nomeArtefato": "foo/spec/inclusao-foo-controllers-spec.js",
+                "tipoArtefato": {
+                    "extensao": "js",
+                    "tipo": [
+                        {
+                            "regex": {}
+                        }
+                    ]
+                },
+                "nomeProjeto": "foo",
+                "tipoAlteracao": "M",
+                "numeroAlteracao": 1
             },
-            "nomeProjeto": "foo",
-            "tipoAlteracao": "M",
-            "numeroAlteracao": 1
-        },
-        {
-            "nomeArtefato": "foo/src/app/spas/inventario/bem-services.js",
-            "tipoArtefato": {
-                "extensao": "js",
-                "tipo": [
-                    {
-                        "regex": {}
-                    }
-                ]
-            },
-            "nomeProjeto": "foo",
-            "tipoAlteracao": "D",
-            "numeroAlteracao": 1
-        }
-    ],
-    "numeroAlteracao": 1
-}
+            {
+                "nomeArtefato": "foo/src/app/spas/inventario/bem-services.js",
+                "tipoArtefato": {
+                    "extensao": "js",
+                    "tipo": [
+                        {
+                            "regex": {}
+                        }
+                    ]
+                },
+                "nomeProjeto": "foo",
+                "tipoAlteracao": "D",
+                "numeroAlteracao": 1
+            }
+        ],
+        "numeroAlteracao": 1
+    }
+]
