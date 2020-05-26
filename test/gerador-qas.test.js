@@ -45,11 +45,11 @@ describe('test gerais', () => {
 
     xit('teste de listagem de artefatos renomeados', async () => {
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'arquivoFoo.txt' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'arquivoFoo.txt' }
         ])
 
@@ -105,7 +105,7 @@ describe('test gerais', () => {
             new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
     })
 
-    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -355,7 +355,7 @@ describe('test gerais', () => {
 
     it('teste de listagem de artefatos commitados de uma vez', async () => {
 
-        await gitUtil.manipularListaArquivoComCommit('0000000', [
+        await gitUtil.manipularListaArquivoComCommxit('0000000', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/inventario/bem-services.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
@@ -365,7 +365,7 @@ describe('test gerais', () => {
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/alterar-imovel.tpl.html' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
@@ -373,12 +373,12 @@ describe('test gerais', () => {
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/inclusao-foo/inclusao-foo-controllers.js' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel-controllers.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/imovel/cadastro/cadastro-imovel.tpl.html' }
         ])
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'Gruntfile.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.DELETED, pathArquivo: 'src/app/spas/inventario/bem-services.js' }
@@ -386,53 +386,51 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
+        expect(lista).toHaveLength(4)
 
-        // expect(lista).toHaveLength(4)
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        // expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        // expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*Gruntfile.js$/g)
 
-        // expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-        // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*Gruntfile.js$/g)
+        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
-        // expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        // expect(lista[1].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bem-services.js$/g)
 
-        // expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
-        // expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bem-services.js$/g)
+        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[2].listaArtefatoSaida).toHaveLength(2)
 
-        // expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        // expect(lista[2].listaArtefatoSaida).toHaveLength(2)
+        expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*cadastro-imovel.tpl.html$/g)
 
-        // expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-        // expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*cadastro-imovel.tpl.html$/g)
+        expect(lista[2].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[2].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+        expect(lista[2].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*alterar-imovel.tpl.html$/g)
 
-        // expect(lista[2].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[2].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        // expect(lista[2].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*alterar-imovel.tpl.html$/g)
+        expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[3].listaArtefatoSaida).toHaveLength(3)
 
-        // expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-        // expect(lista[3].listaArtefatoSaida).toHaveLength(3)
+        expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-foo-controllers-spec.js$/g)
 
-        // expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-foo-controllers-spec.js$/g)
+        expect(lista[3].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[3].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
+        expect(lista[3].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*cadastro-imovel-controllers.js$/g)
 
-        // expect(lista[3].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[3].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
-        // expect(lista[3].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*cadastro-imovel-controllers.js$/g)
-
-        // expect(lista[3].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-        // expect(lista[3].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
-        // expect(lista[3].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
+        expect(lista[3].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+        expect(lista[3].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+        expect(lista[3].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
     })
 
     xit('teste ignorar stashes na listagem de artefatos', async () => {
@@ -521,7 +519,7 @@ describe('test gerais', () => {
 
     xit('teste de listagem com arquivos com extensoes diferentes separados', async () => {
 
-        await gitUtil.manipularListaArquivoComCommit('1111111', [
+        await gitUtil.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'css/foo.css' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/inventario/foo.tpl.html' }
@@ -678,12 +676,12 @@ describe('test gerais', () => {
             mostrarRenomeados: true
         })
 
-        await gitFoo.manipularListaArquivoComCommit('1111111', [
+        await gitFoo.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/main/java/br/com/foo/bar/api/v1/resource/BazResource.java' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/test/java/br/com/foo/bar/api/v1/resources/test/BazResourceTest.java' }
         ])
 
-        await gitFoo.manipularListaArquivoComCommit('1111111', [
+        await gitFoo.manipularListaArquivoComCommxit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/main/java/br/com/foo/bar/api/v1/resource/GatewayBar.java' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/test/java/br/com/foo/bar/api/v1/resources/test/GatewayBarTest.java' }
         ])
