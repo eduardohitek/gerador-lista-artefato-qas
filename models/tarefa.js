@@ -10,7 +10,6 @@ const Tarefa = function ({
     this.numeroTarefa = numeroTarefa
     this.tipoAlteracao = tipoAlteracao
     this.listaArtefato = listaArtefato
-
     this.nomeAntigoArquivo = nomeAntigoArquivo
     this.nomeNovoArquivo = nomeNovoArquivo
 

@@ -1,6 +1,6 @@
 const SaidaVO = function () {
 
-    this.listaNumTarefaSaida = []
+    this.numeroTarefaSaida = ''
     this.listaArtefatoSaida = []
 
     return this
