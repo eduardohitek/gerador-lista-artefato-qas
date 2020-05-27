@@ -28,7 +28,7 @@ describe('test gerais', () => {
         })
     })
 
-    xit('teste do modulo Param com parametros repetidos', () => {
+    it('teste do modulo Param com parametros repetidos', () => {
 
         const params = new Param({
             autor: "fulano",
@@ -43,7 +43,7 @@ describe('test gerais', () => {
         expect(params.listaProjeto[0]).toBe('bar')
     })
 
-    xit('teste de listagem de artefatos com projeto inválido', () => {
+    it('teste de listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
             autor: "fulano",
@@ -56,7 +56,7 @@ describe('test gerais', () => {
             new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
     })
 
-    xit('teste de listagem de artefatos renomeados', async () => {
+    it('teste de listagem de artefatos renomeados', async () => {
 
         await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'arquivoFoo.txt' }
@@ -105,7 +105,7 @@ describe('test gerais', () => {
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
     })
 
-    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -181,7 +181,7 @@ describe('test gerais', () => {
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
-        
+
         require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
         expect(lista).toHaveLength(2)
@@ -192,7 +192,7 @@ describe('test gerais', () => {
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoFoo.txt')
 
         expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
         expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
@@ -802,6 +802,10 @@ describe('test gerais', () => {
 
         gitFoo.removerDiretorioProjeto()
         gitBar.removerDiretorioProjeto()
+    })
+
+    afterEach(async () => {
+        gitUtil.removerDiretorioProjeto()
     })
 
     afterEach(async () => {
