@@ -28,7 +28,7 @@ describe('test gerais', () => {
         })
     })
 
-    it('teste do modulo Param com parametros repetidos', () => {
+    xit('teste do modulo Param com parametros repetidos', () => {
 
         const params = new Param({
             autor: "fulano",
@@ -41,9 +41,22 @@ describe('test gerais', () => {
 
         expect(params.listaProjeto).toHaveLength(1)
         expect(params.listaProjeto[0]).toBe('bar')
-    });
+    })
 
-    it('teste de listagem de artefatos renomeados', async () => {
+    xit('teste de listagem de artefatos com projeto inválido', () => {
+
+        const paramsError = new Param({
+            autor: "fulano",
+            listaProjeto: ["qux"],
+            listaTarefa: ["1111111"]
+        })
+
+        expect.assertions(1);
+        expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
+            new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
+    })
+
+    xit('teste de listagem de artefatos renomeados', async () => {
 
         await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'arquivoFoo.txt' }
@@ -92,20 +105,7 @@ describe('test gerais', () => {
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
     })
 
-    it('teste de listagem de artefatos com projeto inválido', () => {
-
-        const paramsError = new Param({
-            autor: "fulano",
-            listaProjeto: ["qux"],
-            listaTarefa: ["1111111"]
-        })
-
-        expect.assertions(1);
-        expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
-            new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
-    })
-
-    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -181,7 +181,7 @@ describe('test gerais', () => {
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
-
+        
         require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
         expect(lista).toHaveLength(2)
@@ -804,11 +804,7 @@ describe('test gerais', () => {
         gitBar.removerDiretorioProjeto()
     })
 
-    // afterEach(async () => {
-    //     gitUtil.removerDiretorioProjeto()
-    // })
-
-    // afterAll(async () => {
-    //     gitUtil.removerDiretorioTest()
-    // })
+    afterEach(async () => {
+        gitUtil.removerDiretorioTest()
+    })
 })
