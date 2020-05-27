@@ -127,8 +127,6 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
-
         expect(lista).toHaveLength(2)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
@@ -156,7 +154,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, R, D e A novamente', async () => {
+    it('teste de listagem de artefato A, R, D e A novamente', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -183,6 +181,8 @@ describe('test gerais', () => {
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
+
+        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
         expect(lista).toHaveLength(2)
 
