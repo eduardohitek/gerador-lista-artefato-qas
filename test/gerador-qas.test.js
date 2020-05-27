@@ -350,7 +350,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefatos commitados de uma vez', async () => {
+    it('teste de listagem de artefatos commitados de uma vez', async () => {
 
         await gitUtil.manipularListaArquivoComCommit('0000000', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/inventario/bem-services.js' },
