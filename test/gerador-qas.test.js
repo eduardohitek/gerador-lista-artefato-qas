@@ -105,7 +105,6 @@ describe('test gerais', () => {
             new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
     })
 
-    // ESSE AQUI
     xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
@@ -127,36 +126,29 @@ describe('test gerais', () => {
             'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
         const lista = await gerador(params).gerarListaArtefato()
-        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
-        // expect(lista).toHaveLength(2)
+        expect(lista).toHaveLength(2)
 
-        // expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
-        // expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        // expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-        // expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
-        // expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
-        // expect(lista[1].listaArtefatoSaida).toHaveLength(2)
+        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
-        // expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        // expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
-        // expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
-        // expect(lista[1].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
-
-        // expect(lista[1].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-        // expect(lista[1].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-        // expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
-        // expect(lista[1].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
-        // expect(lista[1].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
+        expect(lista[1].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefato A, R, D e A novamente', async () => {
+    xit('teste de listagem de artefato A, R, D e A novamente', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -173,36 +165,34 @@ describe('test gerais', () => {
         await gitUtil.manipularArquivoComCommit('1111111',
             { origem: 'arquivoQux.txt', destino: 'arquivoBar.txt' }, TIPO_MODIFICACAO.RENAMED)
 
-        // await gitUtil.manipularArquivoComCommit('1111111',
-        //     'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
+        await gitUtil.manipularArquivoComCommit('1111111',
+            'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-        // await gitUtil.manipularArquivoComCommit('1111111',
-        //     'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
+        await gitUtil.manipularArquivoComCommit('1111111',
+            'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
-        // await gitUtil.manipularArquivoComCommit('1111111',
-        //     'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
+        await gitUtil.manipularArquivoComCommit('1111111',
+            'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
+        expect(lista).toHaveLength(2)
 
-        // expect(lista).toHaveLength(2)
+        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
-        // expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
-        // expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+        expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+        expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
-        // expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-        // expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoFoo.txt')
+        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
-        // expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        // expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
-        // expect(lista[1].listaArtefatoSaida).toHaveLength(1)
-
-        // expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
-        // expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-        // expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
+        expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+        expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+        expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
     xit('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
@@ -325,7 +315,6 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(0)
     })
-
     xit('teste de listagem de artefatos criados em branches diferentes', async () => {
 
         await gitUtil.checkoutBranch('branchFoo')
@@ -387,8 +376,6 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
-        
         expect(lista).toHaveLength(4)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
@@ -679,12 +666,12 @@ describe('test gerais', () => {
             mostrarRenomeados: true
         })
 
-        await gitFoo.manipularListaArquivoComCommxit('1111111', [
+        await gitFoo.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/main/java/br/com/foo/bar/api/v1/resource/BazResource.java' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/test/java/br/com/foo/bar/api/v1/resources/test/BazResourceTest.java' }
         ])
 
-        await gitFoo.manipularListaArquivoComCommxit('1111111', [
+        await gitFoo.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/main/java/br/com/foo/bar/api/v1/resource/GatewayBar.java' },
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/test/java/br/com/foo/bar/api/v1/resources/test/GatewayBarTest.java' }
         ])
@@ -808,4 +795,12 @@ describe('test gerais', () => {
         gitFoo.removerDiretorioProjeto()
         gitBar.removerDiretorioProjeto()
     })
+
+    // afterEach(async () => {
+    //     gitUtil.removerDiretorioProjeto()
+    // })
+
+    // afterAll(async () => {
+    //     gitUtil.removerDiretorioTest()
+    // })
 })
