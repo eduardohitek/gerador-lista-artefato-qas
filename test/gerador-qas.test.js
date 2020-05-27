@@ -182,8 +182,6 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
-
         expect(lista).toHaveLength(2)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
@@ -203,7 +201,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
+    it('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -218,7 +216,7 @@ describe('test gerais', () => {
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
         const lista = await gerador(params).gerarListaArtefato()
-
+        
         expect(lista).toHaveLength(2)
 
         expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
@@ -238,7 +236,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
+    it('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -268,7 +266,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, M, D COM opção de mostrar deletados', async () => {
+    it('teste de listagem de artefato A, M, D COM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -293,7 +291,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    xit('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
+    it('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
@@ -306,7 +304,7 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(0)
     })
 
-    xit('teste de listagem de artefato A, M, R, D SEM opção de mostrar deletados', async () => {
+    it('teste de listagem de artefato A, M, R, D SEM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
@@ -323,7 +321,8 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(0)
     })
-    xit('teste de listagem de artefatos criados em branches diferentes', async () => {
+
+    it('teste de listagem de artefatos criados em branches diferentes', async () => {
 
         await gitUtil.checkoutBranch('branchFoo')
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
