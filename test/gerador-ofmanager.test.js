@@ -665,9 +665,9 @@ describe('test gerais', () => {
 
             expect(lista).toHaveLength(3)
 
-            // gitAbc.removerDiretorioProjeto()
-            // gitDef.removerDiretorioProjeto()
-            // gitGhi.removerDiretorioProjeto()
+            gitAbc.removerDiretorioProjeto()
+            gitDef.removerDiretorioProjeto()
+            gitGhi.removerDiretorioProjeto()
         })
 
         /*

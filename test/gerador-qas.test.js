@@ -660,6 +660,86 @@ describe('test gerais', () => {
             gitBaz.removerDiretorioProjeto()
         })
 
+        // TODO - Terminar esse aqui
+        /* 
+        node app -l QAS --diretorio=/tmp/gerador-lista-artefato-qas --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+        */
+        it('teste ordenação dos artefatos dentro da tarefa', async () => {
+
+            const gitAbc = await new GeradorTestUtil('abc', autor)
+            const gitDef = await new GeradorTestUtil('def', autor)
+            const gitGhi = await new GeradorTestUtil('ghi', autor)
+
+            await gitAbc.manipularArquivoComCommit('0000000', 'arquivoQux.txt', TIPO_MODIFICACAO.ADDED)
+            await gitDef.manipularArquivoComCommit('0000000', 'arquivoBaz.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('0000000', 'arquivoIhx.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('0000000', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
+            await gitDef.manipularArquivoComCommit('0000000', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('0000000', 'arquivoTyu.txt', TIPO_MODIFICACAO.ADDED)
+
+            await gitAbc.manipularArquivoComCommit('0000000', '.jshintr', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('0000000', 'karma-tpz.config.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('0000000', 'arquivoTyuGateway.java', TIPO_MODIFICACAO.ADDED)
+
+            await gitGhi.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('1111111', 'arquivoXvc.txt', TIPO_MODIFICACAO.ADDED)
+
+            await gitAbc.manipularArquivoComCommit('1111111',
+                { origem: '.jshintr', destino: '.jshintrc' }, TIPO_MODIFICACAO.RENAMED)
+
+            await gitAbc.manipularArquivoComCommit('1111111', 'gruntfile-yuiq.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.ori', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'ResourcearquivoRtu.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoUpeGateway.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoTyuGateway.java', TIPO_MODIFICACAO.DELETED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'gruntfile-hko.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoTyuResource.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivo-qux-spec.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivo-qwe-spec.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'karma-pty.config.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'karma-tpz.config.js', TIPO_MODIFICACAO.DELETED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'GatewayArquivoAqw.java', TIPO_MODIFICACAO.ADDED)
+
+            await gitAbc.manipularArquivoComCommit('1111111',
+                { origem: '.jshintrc', destino: '.jshintrcplo' }, TIPO_MODIFICACAO.RENAMED)
+
+            await gitGhi.manipularArquivoComCommit('1111111', 'arquivoIhx.txt', TIPO_MODIFICACAO.MODIFIED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
+            await gitDef.manipularArquivoComCommit('1111111', 'arquivoBaz.txt', TIPO_MODIFICACAO.MODIFIED)
+
+            await gitAbc.manipularArquivoComCommit('2222222', 'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
+            await gitAbc.manipularArquivoComCommit('2222222', 'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
+
+            await gitAbc.manipularArquivoComCommit('3333333', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
+
+            const params = new Param({
+                autor: "fulano",
+                listaProjeto: [
+                    gitAbc.obterCaminhoProjeto(),
+                    gitDef.obterCaminhoProjeto(),
+                    gitGhi.obterCaminhoProjeto(),
+                ],
+                listaTarefa: ["1111111", "2222222", "3333333"],
+                mostrarNumModificacao: true,
+                mostrarCommitsLocais: true,
+                mostrarDeletados: true,
+                mostrarRenomeados: true
+            })
+
+            const lista = await gerador(params).gerarListaArtefato()
+            // require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
+
+            expect(lista).toHaveLength(3)
+
+            gitAbc.removerDiretorioProjeto()
+            gitDef.removerDiretorioProjeto()
+            gitGhi.removerDiretorioProjeto()
+        })
+
         // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
         it('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
