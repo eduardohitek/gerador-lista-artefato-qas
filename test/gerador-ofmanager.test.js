@@ -597,8 +597,9 @@ describe('test gerais', () => {
 
             const gitAbc = await new GeradorTestUtil(projetoAbc, autor)
 
-            await gitAbc.manipularArquivoComCommxxxxit(
-                { task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED })
+            const newLocal = { task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED }
+
+            await gitAbc.manipularArquivoComCommxxxxit(newLocal)
 
             const params = new Param({
                 autor: "fulano",
@@ -615,14 +616,7 @@ describe('test gerais', () => {
             const lista = await gerador(params).gerarListaArtefato()
             require('../lib/printer')({ mostrarNumModificacao: true }, lista).imprimirListaSaida()
 
-            lista[0].listaArtefatoSaida[0]
-
-            // FIXME: jsonLog debugging (remove after use)
-            console.log('%c%s', 'color: #42f59c', 'lista[0].listaArtefatoSaida[2]: ', JSON.stringify(lista[0].listaArtefatoSaida[2]));
-
-
-            expect(lista[0].listaArtefatoSaida[0]).toMatchObject(newFunction(projetoAbc, 
-                { task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED }))
+            expect(lista[0].listaArtefatoSaida[0]).toMatchObject(newFunction(projetoAbc, newLocal))
 
             gitAbc.removerDiretorioProjeto()
         })
