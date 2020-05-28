@@ -28,7 +28,7 @@ describe('test gerais', () => {
         })
     })
 
-    it('teste do modulo Param com parametros repetidos', () => {
+    xit('teste do modulo Param com parametros repetidos', () => {
 
         const params = new Param({
             autor: "fulano",
@@ -43,7 +43,7 @@ describe('test gerais', () => {
         expect(params.listaProjeto[0]).toBe('bar')
     })
 
-    it('teste de listagem de artefatos com projeto inválido', () => {
+    xit('teste de listagem de artefatos com projeto inválido', () => {
 
         const paramsError = new Param({
             autor: "fulano",
@@ -105,7 +105,7 @@ describe('test gerais', () => {
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
     })
 
-    it('teste de listagem de artefatos renomeados 2 vezes', async () => {
+    xit('teste de listagem de artefatos renomeados 2 vezes', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -154,7 +154,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefato A, R, D e A novamente', async () => {
+    xit('teste de listagem de artefato A, R, D e A novamente', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -201,7 +201,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
+    xit('teste de listagem de artefato A, M, D e A com mesmo nome, COM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -236,7 +236,7 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
+    xit('teste de listagem de artefato A, M, D e A com mesmo nome, SEM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -266,7 +266,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefato A, M, D COM opção de mostrar deletados', async () => {
+    xit('teste de listagem de artefato A, M, D COM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -291,7 +291,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
+    xit('teste de listagem de artefato A, M, D SEM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
@@ -304,7 +304,7 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(0)
     })
 
-    it('teste de listagem de artefato A, M, R, D SEM opção de mostrar deletados', async () => {
+    xit('teste de listagem de artefato A, M, R, D SEM opção de mostrar deletados', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
@@ -320,7 +320,7 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(0)
     })
 
-    it('teste de listagem de artefatos criados em branches diferentes', async () => {
+    xit('teste de listagem de artefatos criados em branches diferentes', async () => {
 
         await gitUtil.checkoutBranch('branchFoo')
         await gitUtil.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
@@ -348,7 +348,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/arquivoBar.txt')
     })
 
-    it('teste de listagem de artefatos commitados de uma vez', async () => {
+    xit('teste de listagem de artefatos commitados de uma vez', async () => {
 
         await gitUtil.manipularListaArquivoComCommit('0000000', [
             { tipoAlteracao: TIPO_MODIFICACAO.ADDED, pathArquivo: 'src/app/spas/inventario/bem-services.js' },
@@ -428,7 +428,7 @@ describe('test gerais', () => {
         expect(lista[3].listaArtefatoSaida[2].nomeArtefato).toMatch(/.*inclusao-foo-controllers.js$/g)
     })
 
-    it('teste ignorar stashes na listagem de artefatos', async () => {
+    xit('teste ignorar stashes na listagem de artefatos', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -451,7 +451,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBar.txt$/g)
     })
 
-    it('teste ignorar commits locais na listagem de artefatos', async () => {
+    xit('teste ignorar commits locais na listagem de artefatos', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -464,7 +464,7 @@ describe('test gerais', () => {
     })
 
     // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
-    it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
+    xit('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
         const nomeProjetoQux = 'qux'
         const nomeProjetoBaz = 'baz'
@@ -512,7 +512,7 @@ describe('test gerais', () => {
         gitBaz.removerDiretorioProjeto()
     })
 
-    it('teste de listagem com arquivos com extensoes diferentes separados', async () => {
+    xit('teste de listagem com arquivos com extensoes diferentes separados', async () => {
 
         await gitUtil.manipularListaArquivoComCommit('1111111', [
             { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'css/foo.css' },
@@ -549,7 +549,7 @@ describe('test gerais', () => {
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo.css$/g)
     })
 
-    it('teste de listagem de artefato A e M mas mostrando somente A', async () => {
+    xit('teste de listagem de artefato A e M mas mostrando somente A', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -573,7 +573,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBar.txt$/g)
     })
 
-    it('teste de listagem de artefato A, M e D mas mostrando somente D', async () => {
+    xit('teste de listagem de artefato A, M e D mas mostrando somente D', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -600,7 +600,7 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBar.txt$/g)
     })
 
-    it('teste de listagem de artefato .gitignore', async () => {
+    xit('teste de listagem de artefato .gitignore', async () => {
 
         await gitUtil.manipularArquivoComCommit('1111111',
             '.jshintr', TIPO_MODIFICACAO.ADDED)
@@ -650,7 +650,7 @@ describe('test gerais', () => {
     })
 
     // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
-    it('teste de listagem com arquivos com tipos diferentes separados', async () => {
+    xit('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
         const nomeProjetoFoo = 'foo'
         const nomeProjetoBar = 'bar'
