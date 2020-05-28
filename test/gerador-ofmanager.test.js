@@ -440,43 +440,6 @@ describe('test gerais', () => {
             expect(lista).toHaveLength(0)
         })
 
-        it('teste de listagem com arquivos com extensoes diferentes separados', async () => {
-
-            await gitUtil.manipularListaArquivoComCommit('1111111', [
-                { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'css/foo.css' },
-                { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'spec/inclusao-foo-controllers-spec.js' },
-                { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/inventario/foo.tpl.html' }
-            ])
-
-            const lista = await gerador(params).gerarListaArtefato()
-
-            expect(lista).toHaveLength(3)
-
-            expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[0].listaArtefatoSaida).toHaveLength(1)
-
-            expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo.tpl.html$/g)
-
-            expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[1].listaArtefatoSaida).toHaveLength(1)
-
-            expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-foo-controllers-spec.js$/g)
-
-            expect(lista[2].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[2].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[2].listaArtefatoSaida).toHaveLength(1)
-
-            expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo.css$/g)
-        })
-
         xit('tteste de listagem de artefato A e M mas mostrando somente A', async () => {
 
             await gitUtil.manipularArquivoComCommit('1111111',
@@ -589,11 +552,8 @@ describe('test gerais', () => {
         */
         it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
-            const nomeProjetoQux = 'qux'
-            const nomeProjetoBaz = 'baz'
-
-            const gitQux = await new GeradorTestUtil(nomeProjetoQux, autor)
-            const gitBaz = await new GeradorTestUtil(nomeProjetoBaz, autor)
+            const gitQux = await new GeradorTestUtil('qux', autor)
+            const gitBaz = await new GeradorTestUtil('baz', autor)
 
             await gitQux.manipularArquivoComCommit('1111111', 'arquivoQux.txt', TIPO_MODIFICACAO.ADDED)
             await gitBaz.manipularArquivoComCommit('1111111', 'arquivoBaz.txt', TIPO_MODIFICACAO.ADDED)
@@ -631,16 +591,76 @@ describe('test gerais', () => {
             gitBaz.removerDiretorioProjeto()
         })
 
+        /* 
+        node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+        */
+        it('teste ordenação dos artefatos dentro da tarefa', async () => {
+
+            const gitAbc = await new GeradorTestUtil('abc', autor)
+            const gitDef = await new GeradorTestUtil('def', autor)
+            const gitGhi = await new GeradorTestUtil('ghi', autor)
+
+            await gitAbc.manipularArquivoComCommit('0000000', 'arquivoQux.txt', TIPO_MODIFICACAO.ADDED)
+            await gitDef.manipularArquivoComCommit('0000000', 'arquivoBaz.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('0000000', 'arquivoIhx.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('0000000', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
+            await gitDef.manipularArquivoComCommit('0000000', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('0000000', 'arquivoTyu.txt', TIPO_MODIFICACAO.ADDED)
+
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoXvc.txt', TIPO_MODIFICACAO.ADDED)
+
+            await gitAbc.manipularArquivoComCommit('1111111', 'gruntfile-yuiq.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.ori', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'ResourcearquivoRtu.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoUpeGateway.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'gruntfile-hko.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoTyuResource.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivo-qux-spec.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivo-qwe-spec.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'karma-pty.config.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'GatewayArquivoAqw.java', TIPO_MODIFICACAO.ADDED)
+
+            await gitGhi.manipularArquivoComCommit('1111111', 'arquivoIhx.txt', TIPO_MODIFICACAO.MODIFIED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
+            await gitDef.manipularArquivoComCommit('1111111', 'arquivoBaz.txt', TIPO_MODIFICACAO.MODIFIED)
+
+            await gitAbc.manipularArquivoComCommit('2222222', 'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
+            await gitAbc.manipularArquivoComCommit('2222222', 'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
+
+            const params = new Param({
+                autor: "fulano",
+                listaProjeto: [
+                    gitAbc.obterCaminhoProjeto(),
+                    gitDef.obterCaminhoProjeto(),
+                    gitGhi.obterCaminhoProjeto(),
+                ],
+                listaTarefa: ["1111111","2222222"],
+                mostrarNumModificacao: true,
+                mostrarCommitsLocais: true,
+                mostrarDeletados: true,
+                mostrarRenomeados: true
+            })
+
+            const lista = await gerador(params).gerarListaArtefato()
+            require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
+
+            gitAbc.removerDiretorioProjeto()
+            gitDef.removerDiretorioProjeto()
+            gitGhi.obterCaminhoProjeto()
+        })
+
         /*
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
         */
         xit('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
-            const nomeProjetoFoo = 'foo'
-            const nomeProjetoBar = 'bar'
-
-            const gitFoo = await new GeradorTestUtil(nomeProjetoFoo, autor)
-            const gitBar = await new GeradorTestUtil(nomeProjetoBar, autor)
+            const gitFoo = await new GeradorTestUtil('foo', autor)
+            const gitBar = await new GeradorTestUtil('bar', autor)
 
             const params = new Param({
                 autor: "fulano",

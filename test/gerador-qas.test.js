@@ -713,8 +713,7 @@ describe('test gerais', () => {
             { origem: 'walzz-controller.html', destino: 'yrizz-controller.html' }, TIPO_MODIFICACAO.RENAMED)
 
         const lista = await gerador(params).gerarListaArtefato()
-        require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
-
+        
         expect(lista).toHaveLength(11)
 
         // TODO - Isso aqui deveria esstar numa mesma linha
