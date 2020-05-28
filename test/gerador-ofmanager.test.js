@@ -440,7 +440,7 @@ describe('test gerais', () => {
             expect(lista).toHaveLength(0)
         })
 
-        xit('tteste de listagem com arquivos com extensoes diferentes separados', async () => {
+        it('teste de listagem com arquivos com extensoes diferentes separados', async () => {
 
             await gitUtil.manipularListaArquivoComCommit('1111111', [
                 { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'css/foo.css' },
@@ -613,30 +613,28 @@ describe('test gerais', () => {
 
             const lista = await gerador(params).gerarListaArtefato()
 
-            expect(lista).toHaveLength(2)
+            expect(lista).toHaveLength(1)
 
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
             expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+            expect(lista[0].listaArtefatoSaida).toHaveLength(2)
 
             expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
             expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBaz.txt$/g)
+            expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoQux.txt$/g)
 
-            expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[1].listaArtefatoSaida).toHaveLength(1)
-
-            expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoQux.txt$/g)
+            expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*arquivoBaz.txt$/g)
 
             gitQux.removerDiretorioProjeto()
             gitBaz.removerDiretorioProjeto()
         })
 
-        // node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
-        xit('tteste de listagem com arquivos com tipos diferentes separados', async () => {
+        /*
+        node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
+        */
+        xit('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
             const nomeProjetoFoo = 'foo'
             const nomeProjetoBar = 'bar'
