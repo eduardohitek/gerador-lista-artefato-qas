@@ -405,7 +405,7 @@ describe('test gerais', () => {
             expect(lista[0].listaArtefatoSaida[6].nomeArtefato).toMatch(/.*bem-services.js$/g)
         })
 
-        it('tteste ignorar stashes na listagem de artefatos', async () => {
+        it('teste ignorar stashes na listagem de artefatos', async () => {
 
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -420,7 +420,7 @@ describe('test gerais', () => {
             expect(lista).toHaveLength(1)
 
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+            expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
             expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
             expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
@@ -440,7 +440,7 @@ describe('test gerais', () => {
             expect(lista).toHaveLength(0)
         })
 
-        xit('teste de listagem de artefato A e M mas mostrando somente A', async () => {
+        it('teste de listagem de artefato A e M mas mostrando somente A', async () => {
 
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -456,7 +456,7 @@ describe('test gerais', () => {
             expect(lista).toHaveLength(1)
 
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+            expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
             expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
             expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
@@ -464,7 +464,7 @@ describe('test gerais', () => {
             expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBar.txt$/g)
         })
 
-        xit('tteste de listagem de artefato A, M e D mas mostrando somente D', async () => {
+        it('teste de listagem de artefato A, M e D mas mostrando somente D', async () => {
 
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -483,7 +483,7 @@ describe('test gerais', () => {
             expect(lista).toHaveLength(1)
 
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+            expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
             expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
             expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
@@ -491,7 +491,7 @@ describe('test gerais', () => {
             expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBar.txt$/g)
         })
 
-        xit('tteste de listagem de artefato .gitignore', async () => {
+        it('teste de listagem de artefato .gitignore', async () => {
 
             await gitUtil.manipularArquivoComCommit('1111111',
                 '.jshintr', TIPO_MODIFICACAO.ADDED)
@@ -506,38 +506,35 @@ describe('test gerais', () => {
                 { origem: 'bar/.gitignor', destino: 'bar/.gitignore' }, TIPO_MODIFICACAO.RENAMED)
 
             const lista = await gerador(params).gerarListaArtefato()
+            require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+            expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
+            expect(lista[0].listaArtefatoSaida).toHaveLength(2)
+
             expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
             expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
             expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/.jshintrc')
 
+            expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toBe('foo/bar/.gitignore')
+
             expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[1].listaArtefatoSaida).toHaveLength(1)
-            expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+            expect(lista[1].listaArtefatoSaida).toHaveLength(2)
+
+            expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
             expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/bar/.gitignore')
+            expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/.jshintrc')
+            expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/.jshintr')
+            expect(lista[1].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/.jshintrc')
 
-            expect(lista[2].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[2].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
-            expect(lista[2].listaArtefatoSaida).toHaveLength(1)
-            expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-            expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toBe('foo/.jshintrc')
-            expect(lista[2].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/.jshintr')
-            expect(lista[2].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/.jshintrc')
-
-            expect(lista[3].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[3].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
-            expect(lista[3].listaArtefatoSaida).toHaveLength(1)
-            expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-            expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toBe('foo/bar/.gitignore')
-            expect(lista[3].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/bar/.gitignor')
-            expect(lista[3].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/bar/.gitignore')
+            expect(lista[1].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+            expect(lista[1].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+            expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toBe('foo/bar/.gitignore')
+            expect(lista[1].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/bar/.gitignor')
+            expect(lista[1].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/bar/.gitignore')
         })
 
         afterEach(async () => {
