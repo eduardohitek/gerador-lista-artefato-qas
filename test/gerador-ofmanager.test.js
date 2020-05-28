@@ -15,7 +15,7 @@ describe('test gerais', () => {
         gerador = require('../lib/gerador-ofmanager')
     })
 
-    xdescribe('', () => {
+    describe('', () => {
 
         let gitUtil, params = {}
 
@@ -440,7 +440,7 @@ describe('test gerais', () => {
             expect(lista).toHaveLength(0)
         })
 
-        xit('tteste de listagem de artefato A e M mas mostrando somente A', async () => {
+        xit('teste de listagem de artefato A e M mas mostrando somente A', async () => {
 
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
@@ -550,7 +550,7 @@ describe('test gerais', () => {
         /* 
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
-        xit('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
+        it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
             const gitQux = await new GeradorTestUtil('qux', autor)
             const gitBaz = await new GeradorTestUtil('baz', autor)
@@ -661,7 +661,7 @@ describe('test gerais', () => {
             })
 
             const lista = await gerador(params).gerarListaArtefato()
-            require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
+            // require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
             expect(lista).toHaveLength(3)
 
@@ -822,7 +822,7 @@ describe('test gerais', () => {
         })
     })
 
-    // afterAll(async () => {
-    //     gitUtil.removerDiretorioTest()
-    // })
+    afterEach(async () => {
+        (await new GeradorTestUtil('', '')).removerDiretorioTest()
+    })
 })
