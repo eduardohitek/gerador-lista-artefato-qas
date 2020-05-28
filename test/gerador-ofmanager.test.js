@@ -596,6 +596,46 @@ describe('test gerais', () => {
             const projetoAbc = 'abc'
 
             const gitAbc = await new GeradorTestUtil(projetoAbc, autor)
+
+            await gitAbc.manipularArquivoComCommxxxxit(
+                { task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED })
+
+            const params = new Param({
+                autor: "fulano",
+                listaProjeto: [
+                    gitAbc.obterCaminhoProjeto()
+                ],
+                listaTarefa: ["1111111", "2222222", "3333333"],
+                mostrarNumModificacao: true,
+                mostrarCommitsLocais: true,
+                mostrarDeletados: true,
+                mostrarRenomeados: true
+            })
+
+            const lista = await gerador(params).gerarListaArtefato()
+            require('../lib/printer')({ mostrarNumModificacao: true }, lista).imprimirListaSaida()
+
+            lista[0].listaArtefatoSaida[0]
+
+            // FIXME: jsonLog debugging (remove after use)
+            console.log('%c%s', 'color: #42f59c', 'lista[0].listaArtefatoSaida[2]: ', JSON.stringify(lista[0].listaArtefatoSaida[2]));
+
+
+            expect(lista[0].listaArtefatoSaida[0]).toMatchObject(newFunction(projetoAbc, 
+                { task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED }))
+
+            gitAbc.removerDiretorioProjeto()
+        })
+
+        // TODO - Terminar esse aqui
+        /* 
+        node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+        */
+        xit('teste ordenação dos artefatos dentro da tarefa', async () => {
+
+            const projetoAbc = 'abc'
+
+            const gitAbc = await new GeradorTestUtil(projetoAbc, autor)
             const gitDef = await new GeradorTestUtil('def', autor)
             const gitGhi = await new GeradorTestUtil('ghi', autor)
 
@@ -613,11 +653,11 @@ describe('test gerais', () => {
             await gitGhi.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
             await gitGhi.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
             await gitGhi.manipularArquivoComCommit('1111111', 'arquivoXvc.txt', TIPO_MODIFICACAO.ADDED)
-            
+
             await gitAbc.manipularArquivoComCommit('1111111',
                 { origem: '.jshintr', destino: '.jshintrc' }, TIPO_MODIFICACAO.RENAMED)
-                
-            const arquivoqwecontrollerjs = {task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED}
+
+            const arquivoqwecontrollerjs = { task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED }
 
             await gitAbc.manipularArquivoComCommxxxxit(arquivoqwecontrollerjs)
 
@@ -652,7 +692,7 @@ describe('test gerais', () => {
                     gitDef.obterCaminhoProjeto(),
                     gitGhi.obterCaminhoProjeto(),
                 ],
-                listaTarefa: ["1111111","2222222","3333333"],
+                listaTarefa: ["1111111", "2222222", "3333333"],
                 mostrarNumModificacao: true,
                 mostrarCommitsLocais: true,
                 mostrarDeletados: true,
@@ -660,7 +700,7 @@ describe('test gerais', () => {
             })
 
             const lista = await gerador(params).gerarListaArtefato()
-            require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
+            require('../lib/printer')({ mostrarNumModificacao: true }, lista).imprimirListaSaida()
 
             expect(lista).toHaveLength(2)
 
@@ -677,9 +717,7 @@ describe('test gerais', () => {
             // expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('abc/.jshintrc')
             // expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('abc/.jshintrcplo')
 
-            expect(lista[0].listaArtefatoSaida[2]).toMatchObject({
-                nomeArtefato: projetoAbc + '/' + arquivoqwecontrollerjs.pathArquivo
-            })
+            expect(lista[0].listaArtefatoSaida[2]).toMatchObject(newFunction(projetoAbc, arquivoqwecontrollerjs))
 
             // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivo-qux-spec.js')
             // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivoPty.txt')
@@ -843,3 +881,9 @@ describe('test gerais', () => {
         (await new GeradorTestUtil('', '')).removerDiretorioTest()
     })
 })
+
+function newFunction(projetoAbc, arquivoqwecontrollerjs) {
+    return {
+        nomeArtefato: projetoAbc + '/' + arquivoqwecontrollerjs.pathArquivo
+    }
+}
