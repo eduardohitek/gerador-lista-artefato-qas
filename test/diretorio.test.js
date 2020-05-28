@@ -212,7 +212,7 @@ describe('test gerais', () => {
         gitFoo.removerDiretorioProjeto()
     })
 
-    afterAll(async () => {
-        gitUtil.removerDiretorioTest()
+    afterEach(async () => {
+        (await new GeradorTestUtil('', '')).removerDiretorioTest()
     })
 })

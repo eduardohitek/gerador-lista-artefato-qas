@@ -822,7 +822,7 @@ describe('test gerais', () => {
 
     })
 
-    afterEach(async () => {
+    afterAll(async () => {
         (await new GeradorTestUtil('', '')).removerDiretorioTest()
     })
 })
