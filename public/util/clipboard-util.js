@@ -27,7 +27,7 @@ function clipboardUtil(geradorConstants) {
 
         if (saida.listaArtefatoSaida.length === 1) {
 
-            return saida.listaNumTarefaSaida.length
+            return saida.listaNumeroTarefaSaida.length
 
         } else {
 
@@ -56,7 +56,7 @@ function clipboardUtil(geradorConstants) {
             //     [saida.listaArtefatoSaida[0].tipoAlteracao]))
 
             const ulArtefato = obterUlListaArtefato(saida.listaArtefatoSaida)
-            const ulTarefa = obterUlListaNumTarefa(saida.listaNumTarefaSaida)
+            const ulTarefa = obterUlListaNumTarefa(saida.listaNumeroTarefaSaida)
 
             tdArtefato.appendChild(ulArtefato)
             tdTarefa.appendChild(ulTarefa)
@@ -99,11 +99,11 @@ function clipboardUtil(geradorConstants) {
         return ulArtefato
     }
 
-    function obterUlListaNumTarefa(listaNumTarefaSaida) {
+    function obterUlListaNumTarefa(listaNumeroTarefaSaida) {
 
         const ulTarefa = document.createElement('ul')
 
-        for (const tarefa of listaNumTarefaSaida) {
+        for (const tarefa of listaNumeroTarefaSaida) {
             const li = document.createElement('li')
 
             li.appendChild(document.createTextNode(`Tarefa nº ${tarefa}`))
@@ -118,13 +118,13 @@ function clipboardUtil(geradorConstants) {
 
         return listaSaida.reduce((saidaTexto, saida) => {
 
-            if (saida.listaNumTarefaSaida.length === 1)
+            if (saida.listaNumeroTarefaSaida.length === 1)
                 saidaTexto = saidaTexto.concat(
-                    `\nTarefa nº ${saida.listaNumTarefaSaida[0]}\n`)
+                    `\nTarefa nº ${saida.listaNumeroTarefaSaida[0]}\n`)
 
-            else if (saida.listaNumTarefaSaida.length > 1)
+            else if (saida.listaNumeroTarefaSaida.length > 1)
                 saidaTexto = saidaTexto.concat(
-                    `\nTarefas nº ${saida.listaNumTarefaSaida.join(', ')}\n`)
+                    `\nTarefas nº ${saida.listaNumeroTarefaSaida.join(', ')}\n`)
 
             for (const artefato of saida.listaArtefatoSaida)
                 saidaTexto = saidaTexto.concat(obterListaArtefato(artefato))

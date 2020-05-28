@@ -97,7 +97,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
     function obterNumero(saida) {
 
         if (saida.listaArtefatoSaida.length === 1)
-            return saida.listaNumTarefaSaida.length
+            return saida.listaNumeroTarefaSaida.length
         else
             return saida.listaArtefatoSaida.length
     }

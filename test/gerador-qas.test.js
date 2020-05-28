@@ -78,16 +78,16 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(3)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoQux.txt')
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida[0]).toBe('1111111')
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
@@ -96,8 +96,8 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/arquivoFoo.txt')
         expect(lista[1].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/arquivoQux.txt')
 
-        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[2].listaNumTarefaSaida[0]).toBe('2222222')
+        expect(lista[2].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumeroTarefaSaida[0]).toBe('2222222')
         expect(lista[2].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
@@ -129,8 +129,8 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(2)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(2)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
@@ -145,8 +145,8 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('foo/arquivoQux.txt')
         expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('foo/arquivoBar.txt')
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida[0]).toBe('1111111')
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
@@ -184,16 +184,16 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(2)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoFoo.txt')
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida[0]).toBe('1111111')
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
@@ -219,16 +219,16 @@ describe('test gerais', () => {
         
         expect(lista).toHaveLength(2)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/arquivoBar.txt')
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida[0]).toBe('1111111')
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
@@ -256,8 +256,8 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
 
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
@@ -281,8 +281,8 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
 
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
@@ -334,8 +334,8 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida[0]).toBe('1111111')
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
 
         expect(lista[0].listaArtefatoSaida).toHaveLength(2)
 
@@ -383,24 +383,24 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(4)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*Gruntfile.js$/g)
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bem-services.js$/g)
 
-        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[2].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[2].listaArtefatoSaida).toHaveLength(2)
 
         expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
@@ -411,8 +411,8 @@ describe('test gerais', () => {
         expect(lista[2].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[2].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*alterar-imovel.tpl.html$/g)
 
-        expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[3].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[3].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[3].listaArtefatoSaida).toHaveLength(3)
 
         expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
@@ -442,8 +442,8 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
@@ -492,16 +492,16 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(2)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*arquivoBaz.txt$/g)
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
@@ -524,24 +524,24 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(3)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo.tpl.html$/g)
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*inclusao-foo-controllers-spec.js$/g)
 
-        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[2].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[2].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
@@ -564,8 +564,8 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
@@ -591,8 +591,8 @@ describe('test gerais', () => {
 
         expect(lista).toHaveLength(1)
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
 
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
@@ -616,22 +616,22 @@ describe('test gerais', () => {
 
         const lista = await gerador(params).gerarListaArtefato()
 
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(1)
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('foo/.jshintrc')
 
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[1].listaArtefatoSaida).toHaveLength(1)
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toBe('foo/bar/.gitignore')
 
-        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[2].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
         expect(lista[2].listaArtefatoSaida).toHaveLength(1)
         expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
@@ -639,8 +639,8 @@ describe('test gerais', () => {
         expect(lista[2].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('foo/.jshintr')
         expect(lista[2].listaArtefatoSaida[0].nomeNovoArtefato).toBe('foo/.jshintrc')
 
-        expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[3].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[3].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
         expect(lista[3].listaArtefatoSaida).toHaveLength(1)
         expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
@@ -718,8 +718,8 @@ describe('test gerais', () => {
         expect(lista).toHaveLength(11)
 
         // TODO - Isso aqui deveria esstar numa mesma linha
-        expect(lista[0].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[0].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
         expect(lista[0].listaArtefatoSaida).toHaveLength(2)
         expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
@@ -729,8 +729,8 @@ describe('test gerais', () => {
         expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('bar/quy-controller.html')
         expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('bar/quuz-controller.html')
-        expect(lista[1].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[1].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
         expect(lista[1].listaArtefatoSaida).toHaveLength(2)
         expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
         expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
@@ -741,44 +741,44 @@ describe('test gerais', () => {
         expect(lista[1].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('bar/walzz-controller.html')
         expect(lista[1].listaArtefatoSaida[1].nomeNovoArtefato).toBe('bar/yrizz-controller.html')
 
-        expect(lista[2].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[2].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[2].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[2].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[2].listaArtefatoSaida).toHaveLength(1)
         expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bar-controller.js$/g)
 
-        expect(lista[3].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[3].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[3].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[3].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[3].listaArtefatoSaida).toHaveLength(1)
         expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.html$/g)
 
-        expect(lista[4].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[4].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[4].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[4].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[4].listaArtefatoSaida).toHaveLength(1)
         expect(lista[4].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[4].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[4].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.js$/g)
 
-        expect(lista[5].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[5].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[5].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[5].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[5].listaArtefatoSaida).toHaveLength(1)
         expect(lista[5].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
         expect(lista[5].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
         expect(lista[5].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bar-controller.html$/g)
 
-        expect(lista[6].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[6].listaNumTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
+        expect(lista[6].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[6].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
         expect(lista[6].listaArtefatoSaida).toHaveLength(1)
         expect(lista[6].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
         expect(lista[6].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
         expect(lista[6].listaArtefatoSaida[0].nomeArtefato).toBe('foo/foo-controller.html')
 
         // TODO - Isso aqui deveria esstar numa mesma linha
-        expect(lista[7].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[7].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[7].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[7].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[7].listaArtefatoSaida).toHaveLength(2)
         expect(lista[7].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[7].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
@@ -786,8 +786,8 @@ describe('test gerais', () => {
         expect(lista[7].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[7].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[7].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*BazResourceTest.java$/g)
-        expect(lista[8].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[8].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[8].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[8].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[8].listaArtefatoSaida).toHaveLength(2)
         expect(lista[8].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[8].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
@@ -796,8 +796,8 @@ describe('test gerais', () => {
         expect(lista[8].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
         expect(lista[8].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*GatewayBarTest.java$/g)
 
-        expect(lista[9].listaNumTarefaSaida).toHaveLength(1)
-        expect(lista[9].listaNumTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
+        expect(lista[9].listaNumeroTarefaSaida).toHaveLength(1)
+        expect(lista[9].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
         expect(lista[9].listaArtefatoSaida).toHaveLength(2)
         expect(lista[9].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
         expect(lista[9].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
