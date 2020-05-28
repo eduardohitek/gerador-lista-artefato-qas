@@ -61,6 +61,23 @@ module.exports = function (caminho, autor) {
         }
     }
 
+    this.manipularArquivoComCommxxxxit = async function ({task, pathArquivo, tipoAlteracao}) {
+
+        if (tipoAlteracao !== TIPO_MODIFICACAO.RENAMED) {
+
+            if (tipoAlteracao === TIPO_MODIFICACAO.DELETED)
+                fs.removeSync(this.obterCaminhoArquivo(pathArquivo))
+            else
+                fs.outputFileSync(this.obterCaminhoArquivo(pathArquivo), randomValueHex())
+
+            await this.commitarArquivo(task, pathArquivo)
+        } else {
+
+            await this.git.mv(pathArquivo.origem, pathArquivo.destino)
+            await this.commitarArquivo(task, pathArquivo.destino)
+        }
+    }
+
     this.manipularArquivoSemCommit = async function (pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== TIPO_MODIFICACAO.RENAMED) {

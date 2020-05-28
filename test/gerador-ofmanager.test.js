@@ -15,7 +15,7 @@ describe('test gerais', () => {
         gerador = require('../lib/gerador-ofmanager')
     })
 
-    describe('', () => {
+    xdescribe('', () => {
 
         let gitUtil, params = {}
 
@@ -546,7 +546,7 @@ describe('test gerais', () => {
         /* 
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
-        it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
+        xit('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
             const gitQux = await new GeradorTestUtil('qux', autor)
             const gitBaz = await new GeradorTestUtil('baz', autor)
@@ -587,12 +587,15 @@ describe('test gerais', () => {
             gitBaz.removerDiretorioProjeto()
         })
 
+        // TODO - Terminar esse aqui
         /* 
-        node app -l OFMANAGER --diretorio=/tmp/gerador-lista-artefato-qas --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+        node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
         it('teste ordenação dos artefatos dentro da tarefa', async () => {
 
-            const gitAbc = await new GeradorTestUtil('abc', autor)
+            const projetoAbc = 'abc'
+
+            const gitAbc = await new GeradorTestUtil(projetoAbc, autor)
             const gitDef = await new GeradorTestUtil('def', autor)
             const gitGhi = await new GeradorTestUtil('ghi', autor)
 
@@ -605,7 +608,7 @@ describe('test gerais', () => {
 
             await gitAbc.manipularArquivoComCommit('0000000', '.jshintr', TIPO_MODIFICACAO.ADDED)
             await gitAbc.manipularArquivoComCommit('0000000', 'karma-tpz.config.js', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('0000000', 'arquivoTyuGateway.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('0000000', 'ArquivoTyuGateway.java', TIPO_MODIFICACAO.ADDED)
 
             await gitGhi.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
             await gitGhi.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
@@ -613,19 +616,20 @@ describe('test gerais', () => {
             
             await gitAbc.manipularArquivoComCommit('1111111',
                 { origem: '.jshintr', destino: '.jshintrc' }, TIPO_MODIFICACAO.RENAMED)
+                
+            const arquivoqwecontrollerjs = {task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED}
+
+            await gitAbc.manipularArquivoComCommxxxxit(arquivoqwecontrollerjs)
 
             await gitAbc.manipularArquivoComCommit('1111111', 'gruntfile-yuiq.js', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.ori', TIPO_MODIFICACAO.ADDED)
             await gitAbc.manipularArquivoComCommit('1111111', 'ResourcearquivoRtu.java', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivo-qux.css', TIPO_MODIFICACAO.ADDED)
             await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoUpeGateway.java', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoTyuGateway.java', TIPO_MODIFICACAO.DELETED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'gruntfile-hko.js', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'ArquivoUpeGateway.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'ArquivoTyuGateway.java', TIPO_MODIFICACAO.DELETED)
             await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoTyuResource.java', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('1111111', 'ArquivoTyuResource.java', TIPO_MODIFICACAO.ADDED)
             await gitAbc.manipularArquivoComCommit('1111111', 'arquivo-qux-spec.js', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivo-qwe-spec.js', TIPO_MODIFICACAO.ADDED)
             await gitAbc.manipularArquivoComCommit('1111111', 'karma-pty.config.js', TIPO_MODIFICACAO.ADDED)
             await gitAbc.manipularArquivoComCommit('1111111', 'karma-tpz.config.js', TIPO_MODIFICACAO.DELETED)
             await gitAbc.manipularArquivoComCommit('1111111', 'GatewayArquivoAqw.java', TIPO_MODIFICACAO.ADDED)
@@ -639,8 +643,7 @@ describe('test gerais', () => {
 
             await gitAbc.manipularArquivoComCommit('2222222', 'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
             await gitAbc.manipularArquivoComCommit('2222222', 'arquivoFoo.txt', TIPO_MODIFICACAO.MODIFIED)
-
-            await gitAbc.manipularArquivoComCommit('3333333', 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
+            await gitAbc.manipularArquivoComCommit('2222222', 'arquivo-qux.css', TIPO_MODIFICACAO.DELETED)
 
             const params = new Param({
                 autor: "fulano",
@@ -657,8 +660,39 @@ describe('test gerais', () => {
             })
 
             const lista = await gerador(params).gerarListaArtefato()
+            require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
-            expect(lista).toHaveLength(3)
+            expect(lista).toHaveLength(2)
+
+            // expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+            // expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
+            // expect(lista[0].listaArtefatoSaida).toHaveLength(19)
+
+            // expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+            // expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+            // expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('abc/.jshintr')
+            // expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('abc/.jshintrc')
+            // expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+            // expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+            // expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('abc/.jshintrc')
+            // expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('abc/.jshintrcplo')
+
+            expect(lista[0].listaArtefatoSaida[2]).toMatchObject({
+                nomeArtefato: projetoAbc + '/' + arquivoqwecontrollerjs.pathArquivo
+            })
+
+            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivo-qux-spec.js')
+            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivoPty.txt')
+            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/gruntfile-yuiq.js')
+            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/karma-pty.config.js')
+            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/ResourcearquivoRtu.java')
+            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivoTyuResource.java')
+            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivoUpeGateway.java')
+            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/GatewayArquivoAqw.java')             
+
+            // expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            // expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+            // expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*BazResourceTest.java$/g)
 
             gitAbc.removerDiretorioProjeto()
             gitDef.removerDiretorioProjeto()
@@ -668,7 +702,7 @@ describe('test gerais', () => {
         /*
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
         */
-        it('teste de listagem com arquivos com tipos diferentes separados', async () => {
+        xit('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
             const gitFoo = await new GeradorTestUtil('foo', autor)
             const gitBar = await new GeradorTestUtil('bar', autor)
@@ -728,7 +762,6 @@ describe('test gerais', () => {
                 { origem: 'walzz-controller.html', destino: 'yrizz-controller.html' }, TIPO_MODIFICACAO.RENAMED)
 
             const lista = await gerador(params).gerarListaArtefato()
-            require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
             expect(lista).toHaveLength(2)
 
