@@ -506,7 +506,6 @@ describe('test gerais', () => {
                 { origem: 'bar/.gitignor', destino: 'bar/.gitignore' }, TIPO_MODIFICACAO.RENAMED)
 
             const lista = await gerador(params).gerarListaArtefato()
-            require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
             expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
@@ -658,7 +657,6 @@ describe('test gerais', () => {
             })
 
             const lista = await gerador(params).gerarListaArtefato()
-            // require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
             expect(lista).toHaveLength(3)
 
@@ -670,7 +668,7 @@ describe('test gerais', () => {
         /*
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
         */
-        xit('teste de listagem com arquivos com tipos diferentes separados', async () => {
+        it('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
             const gitFoo = await new GeradorTestUtil('foo', autor)
             const gitBar = await new GeradorTestUtil('bar', autor)
@@ -730,89 +728,78 @@ describe('test gerais', () => {
                 { origem: 'walzz-controller.html', destino: 'yrizz-controller.html' }, TIPO_MODIFICACAO.RENAMED)
 
             const lista = await gerador(params).gerarListaArtefato()
+            require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
-            expect(lista).toHaveLength(10)
+            expect(lista).toHaveLength(2)
 
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[0].listaArtefatoSaida).toHaveLength(1)
+            expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
+            expect(lista[0].listaArtefatoSaida).toHaveLength(10)
+
             expect(lista[0].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
             expect(lista[0].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bar-controller.js$/g)
+            expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*BazResource.java$/g)
+            expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*BazResourceTest.java$/g)
+
+            expect(lista[0].listaArtefatoSaida[4].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[0].listaArtefatoSaida[4].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[4].nomeArtefato).toBe('foo/karma.conf.js')
+            expect(lista[0].listaArtefatoSaida[5].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[0].listaArtefatoSaida[5].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[5].nomeArtefato).toBe('foo/Gruntfile.js')
+
+            expect(lista[0].listaArtefatoSaida[6].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[0].listaArtefatoSaida[6].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[6].nomeArtefato).toMatch(/.*foo-controller.js$/g)
+
+            expect(lista[0].listaArtefatoSaida[7].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[0].listaArtefatoSaida[7].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[7].nomeArtefato).toBe('foo/foo-controller.html')
+
+            expect(lista[0].listaArtefatoSaida[8].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
+            expect(lista[0].listaArtefatoSaida[8].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[8].nomeArtefato).toMatch(/.*bar-controller.html$/g)
+
+            expect(lista[0].listaArtefatoSaida[9].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[0].listaArtefatoSaida[9].numeroAlteracao).toBe(1)
+            expect(lista[0].listaArtefatoSaida[9].nomeArtefato).toMatch(/.*bar-controller.js$/g)
 
             expect(lista[1].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[1].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[1].listaArtefatoSaida).toHaveLength(1)
-            expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
+            expect(lista[1].listaNumeroTarefaSaida[0]).toBe('2222222')
+            expect(lista[1].listaArtefatoSaida).toHaveLength(7)
+
+            expect(lista[1].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
+            expect(lista[1].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
             expect(lista[1].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.html$/g)
 
-            expect(lista[2].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[2].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[2].listaArtefatoSaida).toHaveLength(1)
-            expect(lista[2].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[2].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[2].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*foo-controller.js$/g)
+            expect(lista[1].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[1].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
+            expect(lista[1].listaArtefatoSaida[1].nomeArtefato).toBe('bar/quuz-controller.html')
+            expect(lista[1].listaArtefatoSaida[2].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
+            expect(lista[1].listaArtefatoSaida[2].numeroAlteracao).toBe(1)
+            expect(lista[1].listaArtefatoSaida[2].nomeArtefato).toBe('bar/yrizz-controller.html')
 
-            expect(lista[3].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[3].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[3].listaArtefatoSaida).toHaveLength(1)
-            expect(lista[3].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.DELETED)
-            expect(lista[3].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[3].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*bar-controller.html$/g)
+            expect(lista[1].listaArtefatoSaida[3].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+            expect(lista[1].listaArtefatoSaida[3].numeroAlteracao).toBe(1)
+            expect(lista[1].listaArtefatoSaida[3].nomeAntigoArtefato).toBe('bar/qux-controller.html')
+            expect(lista[1].listaArtefatoSaida[3].nomeNovoArtefato).toBe('bar/quy-controller.html')
 
-            expect(lista[4].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[4].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
-            expect(lista[4].listaArtefatoSaida).toHaveLength(1)
-            expect(lista[4].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.MODIFIED)
-            expect(lista[4].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-            expect(lista[4].listaArtefatoSaida[0].nomeArtefato).toBe('foo/foo-controller.html')
+            expect(lista[1].listaArtefatoSaida[4].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+            expect(lista[1].listaArtefatoSaida[4].numeroAlteracao).toBe(1)
+            expect(lista[1].listaArtefatoSaida[4].nomeAntigoArtefato).toBe('bar/quy-controller.html')
+            expect(lista[1].listaArtefatoSaida[4].nomeNovoArtefato).toBe('bar/quuz-controller.html')
 
-            expect(lista[5].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[5].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[5].listaArtefatoSaida).toHaveLength(2)
-            expect(lista[5].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[5].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[5].listaArtefatoSaida[0].nomeArtefato).toMatch(/.*BazResource.java$/g)
-            expect(lista[5].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[5].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-            expect(lista[5].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*BazResourceTest.java$/g)
+            expect(lista[1].listaArtefatoSaida[5].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+            expect(lista[1].listaArtefatoSaida[5].numeroAlteracao).toBe(1)
+            expect(lista[1].listaArtefatoSaida[5].nomeAntigoArtefato).toBe('bar/frzzy-controller.html')
+            expect(lista[1].listaArtefatoSaida[5].nomeNovoArtefato).toBe('bar/walzz-controller.html')
 
-            expect(lista[7].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[7].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
-            expect(lista[7].listaArtefatoSaida).toHaveLength(2)
-            expect(lista[7].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[7].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[7].listaArtefatoSaida[0].nomeArtefato).toBe('foo/Gruntfile.js')
-            expect(lista[7].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[7].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-            expect(lista[7].listaArtefatoSaida[1].nomeArtefato).toBe('foo/karma.conf.js')
-
-            expect(lista[8].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[8].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
-            expect(lista[8].listaArtefatoSaida).toHaveLength(2)
-            expect(lista[8].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[8].listaArtefatoSaida[0].numeroAlteracao).toBe(1)
-            expect(lista[8].listaArtefatoSaida[0].nomeArtefato).toBe('bar/quuz-controller.html')
-            expect(lista[8].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            expect(lista[8].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-            expect(lista[8].listaArtefatoSaida[1].nomeArtefato).toBe('bar/yrizz-controller.html')
-
-            expect(lista[9].listaNumeroTarefaSaida).toHaveLength(1)
-            expect(lista[9].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['2222222']))
-            expect(lista[9].listaArtefatoSaida).toHaveLength(2)
-
-            expect(lista[9].listaArtefatoSaida[0].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-            expect(lista[9].listaArtefatoSaida[0].numeroAlteracao).toBe(2)
-            expect(lista[9].listaArtefatoSaida[0].nomeArtefato).toBe('bar/quuz-controller.html')
-            expect(lista[9].listaArtefatoSaida[0].nomeAntigoArtefato).toBe('bar/qux-controller.html')
-            expect(lista[9].listaArtefatoSaida[0].nomeNovoArtefato).toBe('bar/quuz-controller.html')
-
-            expect(lista[9].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-            expect(lista[9].listaArtefatoSaida[1].numeroAlteracao).toBe(2)
-            expect(lista[9].listaArtefatoSaida[1].nomeArtefato).toBe('bar/yrizz-controller.html')
-            expect(lista[9].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('bar/frzzy-controller.html')
-            expect(lista[9].listaArtefatoSaida[1].nomeNovoArtefato).toBe('bar/yrizz-controller.html')
+            expect(lista[1].listaArtefatoSaida[6].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
+            expect(lista[1].listaArtefatoSaida[6].numeroAlteracao).toBe(1)
+            expect(lista[1].listaArtefatoSaida[6].nomeAntigoArtefato).toBe('bar/walzz-controller.html')
+            expect(lista[1].listaArtefatoSaida[6].nomeNovoArtefato).toBe('bar/yrizz-controller.html')
 
             gitFoo.removerDiretorioProjeto()
             gitBar.removerDiretorioProjeto()
