@@ -607,9 +607,9 @@ describe('test gerais', () => {
             await gitDef.manipularArquivoComCommit('0000000', 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
             await gitGhi.manipularArquivoComCommit('0000000', 'arquivoTyu.txt', TIPO_MODIFICACAO.ADDED)
 
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
-            await gitAbc.manipularArquivoComCommit('1111111', 'arquivoXvc.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('1111111', 'arquivoOux.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('1111111', 'arquivoPty.txt', TIPO_MODIFICACAO.ADDED)
+            await gitGhi.manipularArquivoComCommit('1111111', 'arquivoXvc.txt', TIPO_MODIFICACAO.ADDED)
 
             await gitAbc.manipularArquivoComCommit('1111111', 'gruntfile-yuiq.js', TIPO_MODIFICACAO.ADDED)
             await gitAbc.manipularArquivoComCommit('1111111', 'arquivoPty.ori', TIPO_MODIFICACAO.ADDED)
@@ -651,7 +651,7 @@ describe('test gerais', () => {
 
             gitAbc.removerDiretorioProjeto()
             gitDef.removerDiretorioProjeto()
-            gitGhi.obterCaminhoProjeto()
+            gitGhi.removerDiretorioProjeto()
         })
 
         /*
