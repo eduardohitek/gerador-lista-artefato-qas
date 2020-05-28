@@ -21,7 +21,7 @@ async function init() {
         await require('./config/http')(app)
         await require('./routes/gerador-web')(app)
 
-        // open(`http://${HOST}:${PORT}`, { app: 'firefox' })
+        open(`http://${HOST}:${PORT}`, { app: 'firefox' })
 
     } else {
         commander.outputHelp()

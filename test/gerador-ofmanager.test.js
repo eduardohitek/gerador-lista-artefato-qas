@@ -15,7 +15,7 @@ describe('test gerais', () => {
         gerador = require('../lib/gerador-ofmanager')
     })
 
-    describe('', () => {
+    xdescribe('', () => {
 
         let gitUtil, params = {}
 
@@ -550,7 +550,7 @@ describe('test gerais', () => {
         /* 
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
-        it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
+        xit('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
             const gitQux = await new GeradorTestUtil('qux', autor)
             const gitBaz = await new GeradorTestUtil('baz', autor)
@@ -591,6 +591,9 @@ describe('test gerais', () => {
             gitBaz.removerDiretorioProjeto()
         })
 
+        /* 
+        node app -l OFMANAGER --diretorio=/tmp/gerador-lista-artefato-qas --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
+        */
         it('teste ordenação dos artefatos dentro da tarefa', async () => {
 
             const gitAbc = await new GeradorTestUtil('abc', autor)
@@ -662,9 +665,9 @@ describe('test gerais', () => {
 
             expect(lista).toHaveLength(3)
 
-            gitAbc.removerDiretorioProjeto()
-            gitDef.removerDiretorioProjeto()
-            gitGhi.removerDiretorioProjeto()
+            // gitAbc.removerDiretorioProjeto()
+            // gitDef.removerDiretorioProjeto()
+            // gitGhi.removerDiretorioProjeto()
         })
 
         /*
@@ -819,7 +822,7 @@ describe('test gerais', () => {
         })
     })
 
-    afterAll(async () => {
-        gitUtil.removerDiretorioTest()
-    })
+    // afterAll(async () => {
+    //     gitUtil.removerDiretorioTest()
+    // })
 })
