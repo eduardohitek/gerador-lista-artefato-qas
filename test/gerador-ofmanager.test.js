@@ -591,7 +591,7 @@ describe('test gerais', () => {
         /* 
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
-        it('teste ordenação dos artefatos dentro da tarefa', async () => {
+        xit('teste ordenação dos artefatos dentro da tarefa', async () => {
 
             const projetoAbc = 'abc'
 
@@ -614,7 +614,7 @@ describe('test gerais', () => {
             const lista = await gerador(params).gerarListaArtefato()
             require('../lib/printer')({ mostrarNumModificacao: true }, lista).imprimirListaSaida()
 
-            expect(lista[0].listaArtefatoSaida[0]).toMatchObject(obterArtefatoSaida(TIPO_MODIFICACAO.ADDED, 1, projetoAbc, 'arquivo-qwe-controller.js'))
+            expect(lista[0].listaArtefatoSaida[0]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, projetoAbc, 'arquivo-qwe-controller.js'))
 
             gitAbc.removerDiretorioProjeto()
         })
@@ -623,13 +623,13 @@ describe('test gerais', () => {
         /* 
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
-        xit('teste ordenação dos artefatos dentro da tarefa', async () => {
+        it('teste ordenação dos artefatos dentro da tarefa', async () => {
 
-            const projetoAbc = 'abc'
+            const projetoAbc = 'abc'; const projetoDef = 'def'; const projetoGhi = 'ghi'
 
             const gitAbc = await new GeradorTestUtil(projetoAbc, autor)
-            const gitDef = await new GeradorTestUtil('def', autor)
-            const gitGhi = await new GeradorTestUtil('ghi', autor)
+            const gitDef = await new GeradorTestUtil(projetoDef, autor)
+            const gitGhi = await new GeradorTestUtil(projetoGhi, autor)
 
             await gitAbc.manipularArquivoComCommit('0000000', 'arquivoQux.txt', TIPO_MODIFICACAO.ADDED)
             await gitDef.manipularArquivoComCommit('0000000', 'arquivoBaz.txt', TIPO_MODIFICACAO.ADDED)
@@ -648,10 +648,6 @@ describe('test gerais', () => {
 
             await gitAbc.manipularArquivoComCommit('1111111',
                 { origem: '.jshintr', destino: '.jshintrc' }, TIPO_MODIFICACAO.RENAMED)
-
-            const arquivoqwecontrollerjs = { task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED }
-
-            await gitAbc.manipularArquivoComCommxxxxit(arquivoqwecontrollerjs)
 
             await gitAbc.manipularArquivoComCommit('1111111', 'gruntfile-yuiq.js', TIPO_MODIFICACAO.ADDED)
             await gitAbc.manipularArquivoComCommit('1111111', 'ResourcearquivoRtu.java', TIPO_MODIFICACAO.ADDED)
@@ -696,33 +692,21 @@ describe('test gerais', () => {
 
             expect(lista).toHaveLength(2)
 
-            // expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
-            // expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
+            expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
+            expect(lista[0].listaNumeroTarefaSaida[0]).toBe('1111111')
             // expect(lista[0].listaArtefatoSaida).toHaveLength(19)
 
-            // expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-            // expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-            // expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('abc/.jshintr')
-            // expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('abc/.jshintrc')
-            // expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.RENAMED)
-            // expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-            // expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('abc/.jshintrc')
-            // expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('abc/.jshintrcplo')
+            expect(lista[0].listaArtefatoSaida[2]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, 'abc/arquivo-qux-spec.js'))
+            expect(lista[0].listaArtefatoSaida[3]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, 'abc/arquivoPty.txt'))
+            expect(lista[0].listaArtefatoSaida[4]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, 'abc/gruntfile-yuiq.js'))
+            expect(lista[0].listaArtefatoSaida[5]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, 'abc/karma-pty.config.js'))
+            expect(lista[0].listaArtefatoSaida[6]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, 'abc/ResourcearquivoRtu.java'))
+            expect(lista[0].listaArtefatoSaida[7]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, 'abc/ArquivoTyuResource.java'))
+            expect(lista[0].listaArtefatoSaida[8]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, 'abc/ArquivoUpeGateway.java'))
+            expect(lista[0].listaArtefatoSaida[9]).toMatchObject(obterObj(TIPO_MODIFICACAO.ADDED, 1, 'abc/GatewayArquivoAqw.java'))
 
-            expect(lista[0].listaArtefatoSaida[2]).toMatchObject(obterArtefatoSaida(projetoAbc, arquivoqwecontrollerjs))
-
-            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivo-qux-spec.js')
-            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivoPty.txt')
-            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/gruntfile-yuiq.js')
-            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/karma-pty.config.js')
-            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/ResourcearquivoRtu.java')
-            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivoTyuResource.java')
-            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivoUpeGateway.java')
-            // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/GatewayArquivoAqw.java')             
-
-            // expect(lista[0].listaArtefatoSaida[1].tipoAlteracao).toBe(TIPO_MODIFICACAO.ADDED)
-            // expect(lista[0].listaArtefatoSaida[1].numeroAlteracao).toBe(1)
-            // expect(lista[0].listaArtefatoSaida[1].nomeArtefato).toMatch(/.*BazResourceTest.java$/g)
+            expect(lista[0].listaArtefatoSaida[10]).toMatchObject(obterObj(TIPO_MODIFICACAO.DELETED, 1, 'abc/karma-tpz.config.js'))
+            expect(lista[0].listaArtefatoSaida[11]).toMatchObject(obterObj(TIPO_MODIFICACAO.DELETED, 1, 'abc/ArquivoTyuGateway.java'))
 
             gitAbc.removerDiretorioProjeto()
             gitDef.removerDiretorioProjeto()
@@ -874,10 +858,10 @@ describe('test gerais', () => {
     })
 })
 
-function obterArtefatoSaida(tipoAlteracao, numeroAlteracao, projeto, nomeArtefato) {
+function obterObj(tipoAlteracao, numeroAlteracao, nomeArtefato) {
     return {
-        tipoAlteracao: TIPO_MODIFICACAO.ADDED,
+        tipoAlteracao: tipoAlteracao,
         numeroAlteracao: numeroAlteracao,
-        nomeArtefato: projeto + '/' + nomeArtefato
+        nomeArtefato: nomeArtefato
     }
 }
