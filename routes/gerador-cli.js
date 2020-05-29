@@ -43,8 +43,6 @@ module.exports = async function (commander) {
 
         function obterTipoGerador(tipoListagem, params) {
 
-            tipoListagem == TIPO_LISTAGEM.QAS
-
             if(tipoListagem == TIPO_LISTAGEM.QAS)
                 return require('../lib/gerador-qas')(params)
 

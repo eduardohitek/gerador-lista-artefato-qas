@@ -1,6 +1,8 @@
 const path = require('path')
 const Param = require('../models/param')
 
+const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
+
 module.exports = function (app) {
 
     const BAD_REQUEST_CODE = 400
@@ -18,9 +20,7 @@ module.exports = function (app) {
                 mostrarCommitsLocais: req.body.mostrarCommitsLocais
             })
 
-            const gerador = require('../lib/gerador-qas')(params)
-            // const gerador = require('../lib/gerador-ofmanager')(params)
-
+            const gerador = obterTipoGerador(req.body.tipoListagem, params)
             const listaSaida = await gerador.gerarListaArtefato()
 
             resp.json(listaSaida)
@@ -49,4 +49,12 @@ module.exports = function (app) {
     app.all('/*', function (req, res) {
         res.sendFile(path.join(__dirname, '../public/gerador.html'))
     });
+
+    function obterTipoGerador(tipoListagem, params) {
+
+        if(tipoListagem == TIPO_LISTAGEM.QAS)
+            return require('../lib/gerador-qas')(params)
+
+        return require('../lib/gerador-ofmanager')(params)
+    }
 }
