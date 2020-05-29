@@ -195,24 +195,43 @@
 				<button class='btn btn-block btn-primary' ng-click='vm.listarArtefatos()'>Gerar Lista</button>
 			</div>
 
-			<div class='p-2' ng-if='vm.listaSaida.length'>
-				<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'
-					ng-click='vm.copiarTabelaPlainTextClipboard()'>Copiar Resultado Plain Text</button>
-			</div>
-
-			<div class='p-2' ng-if='vm.listaSaida.length'>
-				<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'
-					ng-click='vm.copiarTabelaClipboard()'>Copiar Resultado Tabulado</button>
-			</div>
-
 			<div class='p-2'>
 				<button class='btn btn-block btn-danger' ng-click='vm.limparFiltros()'>Limpar</button>
 			</div>
 
+		</div>
+
+		<div class='row d-flex flex-row-reverse pb-2 border-top' ng-if='vm.listaSaida.length'>
+
+			<div class='p-2' ng-if='vm.listaSaida.length'>
+				<button class='btn btn-block btn-success' 
+					ng-click='vm.copiarTabelaPlainTextClipboard()'>Copiar Resultado Plain Text</button>
+			</div>
+
+			<div class='p-2' ng-if='vm.listaSaida.length'>
+				<button class='btn btn-block btn-success'
+					ng-click='vm.copiarTabelaClipboard()'>Copiar Resultado Tabulado</button>
+			</div>
 
 		</div>
 
-		<div ng-include="'spas/include/lista-artefato-qas.html'"></div>
+		<div ng-include="'spas/include/lista-artefato-ofmanager.html'"></div>
+		<!-- <div ng-include="'spas/include/lista-artefato-qas.html'"></div> -->
+
+		<div class='row d-flex flex-row-reverse pb-2' ng-if='vm.listaSaida.length'>
+
+			<div class='p-2' ng-if='vm.listaSaida.length'>
+				<button class='btn btn-block btn-success'
+					ng-click='vm.copiarTabelaPlainTextClipboard()'>Copiar Resultado Plain Text</button>
+			</div>
+
+			<div class='p-2' ng-if='vm.listaSaida.length'>
+				<button class='btn btn-block btn-success' 
+					ng-click='vm.copiarTabelaClipboard()'>Copiar Resultado Tabulado</button>
+			</div>
+
+		</div>
+
 	</div>
 
 	<footer class='container pt-2 pt-md-3 border-top'>
