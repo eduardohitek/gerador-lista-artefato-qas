@@ -212,13 +212,25 @@
 					<button class='btn btn-block btn-primary' ng-click='vm.listarArtefatos()'>Gerar Lista</button>
 				</div>
 	
-				<div class='py-3 pr-1'>
+				<div class='py-3 px-1'>
 					<button class='btn btn-block btn-danger' ng-click='vm.limparFiltros()'>Limpar</button>
+				</div>
+
+				<div class='py-3 px-1'>
+					<button class='btn btn-block btn-success' 
+						ng-click='vm.copiarTabelaPlainTextClipboard()'>Copiar Resultado Plain Text</button>
+				</div>
+	
+				<div class='py-3 px-1'>
+					<button class='btn btn-block btn-success'
+						ng-click='vm.copiarTabelaClipboard()'>Copiar Resultado Tabulado</button>
 				</div>
 
 			</div>
 
 		</div>
+
+		<div ng-include="'spas/include/lista-artefato-ofmanager.html'"></div>
 
 		<hr class="my-2"/>
 
@@ -440,8 +452,6 @@
 			</div>
 
 		</div>
-
-		<div ng-include="'spas/include/lista-artefato-ofmanager.html'"></div>
 
 		<div class='row d-flex flex-row-reverse pb-2' ng-if='vm.listaSaida.length'>
 
