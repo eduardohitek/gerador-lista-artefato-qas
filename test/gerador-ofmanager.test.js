@@ -597,9 +597,7 @@ describe('test gerais', () => {
 
             const gitAbc = await new GeradorTestUtil(projetoAbc, autor)
 
-            const newLocal = { task: '1111111', pathArquivo: 'arquivo-qwe-controller.js', tipoAlteracao: TIPO_MODIFICACAO.ADDED }
-
-            await gitAbc.manipularArquivoComCommxxxxit(newLocal)
+            await gitAbc.manipularArquivoComCommit('1111111', 'arquivo-qwe-controller.js', TIPO_MODIFICACAO.ADDED)
 
             const params = new Param({
                 autor: "fulano",
@@ -616,7 +614,7 @@ describe('test gerais', () => {
             const lista = await gerador(params).gerarListaArtefato()
             require('../lib/printer')({ mostrarNumModificacao: true }, lista).imprimirListaSaida()
 
-            expect(lista[0].listaArtefatoSaida[0]).toMatchObject(newFunction(projetoAbc, newLocal))
+            expect(lista[0].listaArtefatoSaida[0]).toMatchObject(obterArtefatoSaida(TIPO_MODIFICACAO.ADDED, 1, projetoAbc, 'arquivo-qwe-controller.js'))
 
             gitAbc.removerDiretorioProjeto()
         })
@@ -711,7 +709,7 @@ describe('test gerais', () => {
             // expect(lista[0].listaArtefatoSaida[1].nomeAntigoArtefato).toBe('abc/.jshintrc')
             // expect(lista[0].listaArtefatoSaida[1].nomeNovoArtefato).toBe('abc/.jshintrcplo')
 
-            expect(lista[0].listaArtefatoSaida[2]).toMatchObject(newFunction(projetoAbc, arquivoqwecontrollerjs))
+            expect(lista[0].listaArtefatoSaida[2]).toMatchObject(obterArtefatoSaida(projetoAbc, arquivoqwecontrollerjs))
 
             // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivo-qux-spec.js')
             // expect(lista[0].listaArtefatoSaida[0].nomeArtefato).toBe('abc/arquivoPty.txt')
@@ -876,8 +874,10 @@ describe('test gerais', () => {
     })
 })
 
-function newFunction(projetoAbc, arquivoqwecontrollerjs) {
+function obterArtefatoSaida(tipoAlteracao, numeroAlteracao, projeto, nomeArtefato) {
     return {
-        nomeArtefato: projetoAbc + '/' + arquivoqwecontrollerjs.pathArquivo
+        tipoAlteracao: TIPO_MODIFICACAO.ADDED,
+        numeroAlteracao: numeroAlteracao,
+        nomeArtefato: projeto + '/' + nomeArtefato
     }
 }

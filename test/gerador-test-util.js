@@ -77,7 +77,7 @@ module.exports = function (caminho, autor) {
             await this.commitarArquivo(task, pathArquivo.destino)
         }
     }
-
+    
     this.manipularArquivoSemCommit = async function (pathArquivo, tipoAlteracao) {
 
         if (tipoAlteracao !== TIPO_MODIFICACAO.RENAMED) {
