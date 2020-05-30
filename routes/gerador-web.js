@@ -1,7 +1,7 @@
 const path = require('path')
 const Param = require('../models/param')
 
-const { Parser } = require('json2csv');
+const { Parser, transforms: { unwind }  } = require('json2csv')
 
 const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
 
@@ -48,32 +48,54 @@ module.exports = function (app) {
 
             // https://stackoverflow.com/questions/20620771/how-to-parse-json-object-to-csv-file-using-json2csv-nodejs-module
 
-            const myCars = [
+            const listaSaida = [
                 {
-                    "car": "Audi",
-                    "price": 40000,
-                    "color": "blue"
+                    "carModel": "BMW",
+                    "price": 15000,
+                    "items": [
+                        {
+                            "name": "airbag",
+                            "color": "white"
+                        }, {
+                            "name": "dashboard",
+                            "color": "black"
+                        }
+                    ]
                 }, {
-                    "car": "BMW",
-                    "price": 35000,
-                    "color": "black"
-                }, {
-                    "car": "Porsche",
-                    "price": 60000,
-                    "color": "green"
+                    "carModel": "Porsche",
+                    "price": 30000,
+                    "items": [
+                        {
+                            "name": "airbag",
+                            "items": [
+                                {
+                                    "position": "left",
+                                    "color": "white"
+                                }, {
+                                    "position": "right",
+                                    "color": "gray"
+                                }
+                            ]
+                        }, {
+                            "name": "dashboard",
+                            "items": [
+                                {
+                                    "position": "left",
+                                    "color": "gray"
+                                }, {
+                                    "position": "right",
+                                    "color": "black"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ];
 
-            const fields = [{
-                label: 'Car Name',
-                value: 'car'
-            }, {
-                label: 'Price USD',
-                value: 'price'
-            }];
-
-            const json2csvParser = new Parser({ fields });
-            const csv = json2csvParser.parse(myCars);
+            const fields = ['carModel', 'price', 'items.name', 'items.color', 'items.items.position', 'items.items.color'];
+            const transforms = [unwind({ paths: ['items', 'items.items'] })];
+            const json2csvParser = new Parser({ fields, transforms });
+            const csv = json2csvParser.parse(listaSaida);
 
             resp.json(csv)
 
