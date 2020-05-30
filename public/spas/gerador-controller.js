@@ -12,6 +12,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
     vm.TIPO_ALERTA = geradorConstants.TIPO_ALERTA
     vm.TIPO_MODIFICACAO = geradorConstants.TIPO_MODIFICACAO
+    vm.TIPO_LISTAGEM = geradorConstants.TIPO_LISTAGEM
 
     vm.init = init
     vm.listarArtefatos = listarArtefatos
@@ -219,6 +220,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
             listaTarefa: [],
             mostrarDeletados: false,
             mostrarRenomeados: false,
+            tipoListagem: vm.TIPO_LISTAGEM.OFMANAGER,
 
             // TODO - Remover
             mostrarCommitsLocais: true

@@ -2,6 +2,11 @@ angular
     .module('geradorApp')
     .constant('geradorConstants', {
 
+        TIPO_LISTAGEM: {
+            QAS: 'QAS', 
+            OFMANAGER: 'OFMANAGER'
+        },
+
         TIPO_MODIFICACAO: {
             A: 'Criado',
             M: 'Alterado',

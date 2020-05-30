@@ -72,8 +72,7 @@
 						<div class='col px-0'>
 
 							<select class="custom-select" id="inputGroupSelect04" ng-model='vm.req.tipoListagem'>
-								<option value="OFMANAGER">OFMANAGER</option>
-								<option value="QAS">QAS</option>
+								<option ng-repeat="tipo in vm.TIPO_LISTAGEM" value="{{tipo}}">{{tipo}}</option>
 							</select>
 
 						</div>
