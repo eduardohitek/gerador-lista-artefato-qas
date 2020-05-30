@@ -34,7 +34,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
         limparFiltros()
 
         // TODO - Remover
-        vm.req.listaTarefa = [1111111,2222222,3333333]
+        vm.req.listaTarefa = ["1111111","2222222","3333333"]
         vm.req.autor = 'fulano'
 
         listarDiretorioPadrao()
@@ -219,6 +219,8 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
             listaTarefa: [],
             mostrarDeletados: false,
             mostrarRenomeados: false,
+
+            // TODO - Remover
             mostrarCommitsLocais: true
         }
 
