@@ -1,7 +1,7 @@
 const path = require('path')
 const Param = require('../models/param')
 
-const { Parser } = require('json2csv');
+const geradorCvs = require('../lib/gerador-cvs')
 
 const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
 
@@ -46,48 +46,9 @@ module.exports = function (app) {
                 mostrarCommitsLocais: req.body.mostrarCommitsLocais
             })
 
-            const fields = [
-                {
-                    label: 'Número de Alterações',
-                    value: 'numeroAlteracao'
-                },
-                {
-                    label: 'Nome dos artefatos',
-                    value: 'listaNomeArtefato'
-                },
-                {
-                    label: 'O que será feito',
-                    value: 'numeroTarefa'
-                }
-            ];
-
             const gerador = obterTipoGerador(req.body.tipoListagem, params)
             const listaSaida = await gerador.gerarListaArtefato()
-
-            const listaSaidaCVS = listaSaida.reduce((listaRetorno, saida) => {
-
-                const obj = {}
-
-                // TODO - Colocar num util da vida
-                if (saida.listaNumeroTarefaSaida.length === 1)
-                    obj.numeroTarefa = `Tarefa nº ${saida.listaNumeroTarefaSaida[0]}`
-                else if (saida.listaNumeroTarefaSaida.length > 1) {
-                    obj.numeroTarefa = `Tarefas nº ${saida.listaNumeroTarefaSaida.join(', ')}`
-                }
-
-                obj.numeroAlteracao = saida.listaArtefatoSaida.length
-
-                obj.listaNomeArtefato = saida.listaArtefatoSaida.map(artefato =>  
-                    artefato.nomeArtefato
-                ).join('\n')
-
-                listaRetorno.push(obj)
-
-                return listaRetorno
-            },[])
-
-            const json2csvParser = new Parser({ fields });
-            const csv = json2csvParser.parse(listaSaidaCVS);
+            const csv = geradorCvs.obterSaidaCsv(listaSaida)
 
             resp.json(csv)
 
