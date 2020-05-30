@@ -46,10 +46,41 @@ module.exports = function (app) {
                 mostrarCommitsLocais: req.body.mostrarCommitsLocais
             })
 
+            // https://stackoverflow.com/questions/20620771/how-to-parse-json-object-to-csv-file-using-json2csv-nodejs-module
+
+            // const fields = ['car', 'price', 'color'];
+            // const opts = { fields };
+
+            // var listaSaida = [
+            //     {
+            //       "car": "Audi",
+            //       "price": 40000,
+            //       "color": "blue"
+            //     }, {
+            //       "car": "BMW",
+            //       "price": 35000,
+            //       "color": "black"
+            //     }, {
+            //       "car": "Porsche",
+            //       "price": 60000,
+            //       "color": "green"
+            //     }
+            // ];
+
+            const fields = [
+                'nomeArtefato',
+                'nomeNovoArtefato',
+                'nomeAntigoArtefato',
+                'tipoArtefato',
+                'tipoAlteracao',
+                'numeroAlteracao'
+            ]
+            const opts = { fields };        
+
             const gerador = obterTipoGerador(req.body.tipoListagem, params)
             const listaSaida = await gerador.gerarListaArtefato()
 
-            const csv = parse(listaSaida, []);
+            const csv = parse(listaSaida[0].listaArtefatoSaida, opts);
 
             resp.json(csv)
 

@@ -250,15 +250,6 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
         limparMessages()
 
-        // https://github.com/alferov/angular-file-saver
-        // https://stackoverflow.com/questions/48699963/download-csv-format-using-angularjs
-
-        // download().then(()=> {
-
-        //     adicionarMensagemSucesso('Dados da tabela exportados',
-        //     geradorConstants.TIPO_POSICAO_ALERT.TOP)
-        // })
-
         geradorService.obterListaArtefatoCsv(vm.req)
         .then((resposta) => {
 
