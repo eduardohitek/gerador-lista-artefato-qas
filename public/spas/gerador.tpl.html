@@ -216,15 +216,15 @@
 				</div>
 
 				<div class='py-3 px-1' ng-if='vm.listaSaida.length'>
-					
 					<button class='btn btn-block btn-success' 
-						ng-click='vm.exportarTabelaCsv()'>Exportar Lista para CSV</button>
-
+						ng-click='vm.exportarTabelaCsv()'
+						title='Exportar listagem para um arquivo CSV'>Exportar para CSV</button>
 				</div>
-	
+
 				<div class='py-3 px-1' ng-if='vm.listaSaida.length'>
-					<button class='btn btn-block btn-success'
-						ng-click='vm.copiarTabelaClipboard()'>Copiar Resultado Tabulado</button>
+					<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'
+						ng-click='vm.copiarTabelaPlainTextClipboard()'
+						title='Copiar texto da listagem para o clipboard'>Copiar para o Clipboard</button>
 				</div>
 
 			</div>
