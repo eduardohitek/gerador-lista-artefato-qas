@@ -70,6 +70,8 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         if (vm.req.listaTarefa.length && vm.req.listaProjeto.length) {
 
+            vm.req.tipoListagem = vm.tipoListagem
+
             blockUI.start()
 
             geradorService.gerarListaArtefato(vm.req)
@@ -215,12 +217,13 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
 
         limparMessages()
 
+        vm.tipoListagem = vm.TIPO_LISTAGEM.OFMANAGER
+
         vm.req = {
             listaProjeto: [],
             listaTarefa: [],
             mostrarDeletados: false,
             mostrarRenomeados: false,
-            tipoListagem: vm.TIPO_LISTAGEM.OFMANAGER,
 
             // TODO - Remover
             mostrarCommitsLocais: true

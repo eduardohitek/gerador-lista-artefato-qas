@@ -71,7 +71,7 @@
 
 						<div class='col px-0'>
 
-							<select class="custom-select" id="inputGroupSelect04" ng-model='vm.req.tipoListagem'>
+							<select class="custom-select" ng-model='vm.tipoListagem'>
 								<option ng-repeat="tipo in vm.TIPO_LISTAGEM" value="{{tipo}}">{{tipo}}</option>
 							</select>
 
@@ -215,12 +215,12 @@
 					<button class='btn btn-block btn-danger' ng-click='vm.limparFiltros()'>Limpar</button>
 				</div>
 
-				<div class='py-3 px-1'>
+				<div class='py-3 px-1' ng-if='vm.listaSaida.length'>
 					<button class='btn btn-block btn-success' 
 						ng-click='vm.copiarTabelaPlainTextClipboard()'>Copiar Resultado Plain Text</button>
 				</div>
 	
-				<div class='py-3 px-1'>
+				<div class='py-3 px-1' ng-if='vm.listaSaida.length'>
 					<button class='btn btn-block btn-success'
 						ng-click='vm.copiarTabelaClipboard()'>Copiar Resultado Tabulado</button>
 				</div>
@@ -230,7 +230,7 @@
 		</div>
 
 		<div ng-include="'spas/include/lista-artefato-ofmanager.html'"></div>
-		<!-- <div ng-include="'spas/include/lista-artefato-qas.html'"></div> -->
+		<div ng-include="'spas/include/lista-artefato-qas.html'"></div>
 
 		<hr class="my-2"/>
 
