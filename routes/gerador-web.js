@@ -1,7 +1,7 @@
 const path = require('path')
 const Param = require('../models/param')
 
-const { parse } = require('json2csv');
+const { Parser } = require('json2csv');
 
 const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
 
@@ -48,39 +48,32 @@ module.exports = function (app) {
 
             // https://stackoverflow.com/questions/20620771/how-to-parse-json-object-to-csv-file-using-json2csv-nodejs-module
 
-            // const fields = ['car', 'price', 'color'];
-            // const opts = { fields };
+            const myCars = [
+                {
+                    "car": "Audi",
+                    "price": 40000,
+                    "color": "blue"
+                }, {
+                    "car": "BMW",
+                    "price": 35000,
+                    "color": "black"
+                }, {
+                    "car": "Porsche",
+                    "price": 60000,
+                    "color": "green"
+                }
+            ];
 
-            // var listaSaida = [
-            //     {
-            //       "car": "Audi",
-            //       "price": 40000,
-            //       "color": "blue"
-            //     }, {
-            //       "car": "BMW",
-            //       "price": 35000,
-            //       "color": "black"
-            //     }, {
-            //       "car": "Porsche",
-            //       "price": 60000,
-            //       "color": "green"
-            //     }
-            // ];
+            const fields = [{
+                label: 'Car Name',
+                value: 'car'
+            }, {
+                label: 'Price USD',
+                value: 'price'
+            }];
 
-            const fields = [
-                'nomeArtefato',
-                'nomeNovoArtefato',
-                'nomeAntigoArtefato',
-                'tipoArtefato',
-                'tipoAlteracao',
-                'numeroAlteracao'
-            ]
-            const opts = { fields };        
-
-            const gerador = obterTipoGerador(req.body.tipoListagem, params)
-            const listaSaida = await gerador.gerarListaArtefato()
-
-            const csv = parse(listaSaida[0].listaArtefatoSaida, opts);
+            const json2csvParser = new Parser({ fields });
+            const csv = json2csvParser.parse(myCars);
 
             resp.json(csv)
 
@@ -111,7 +104,7 @@ module.exports = function (app) {
 
     function obterTipoGerador(tipoListagem, params) {
 
-        if(tipoListagem == TIPO_LISTAGEM.QAS)
+        if (tipoListagem == TIPO_LISTAGEM.QAS)
             return require('../lib/gerador-qas')(params)
 
         return require('../lib/gerador-ofmanager')(params)
