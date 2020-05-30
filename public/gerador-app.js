@@ -5,8 +5,7 @@ angular
 			'ngResource',
 			'blockUI',
 			'ng.deviceDetector',
-			'ngFileSaver',
-			'ngSanitize', 'ngCsv'
+			'ngFileSaver'
 
 		]).config(configure);
 

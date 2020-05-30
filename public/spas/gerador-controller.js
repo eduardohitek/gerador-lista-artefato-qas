@@ -250,15 +250,15 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
         limparMessages()
 
+        blockUI.start()
+
         geradorService.obterListaArtefatoCsv(vm.req)
         .then((resposta) => {
 
-            if (vm.listaSaida.length) {
+            if (resposta.data) {
 
                 var data = new Blob([resposta.data], { type: 'text/csv;charset=utf-8' })
-                FileSaver.saveAs(data, 'asdf.csv')
-
-                adicionarMensagemSucesso('Dados da tabela exportados', geradorConstants.TIPO_POSICAO_ALERT.TOP)
+                FileSaver.saveAs(data, 'lista-artefato.csv')
 
             } else 
                 adicionarMensagemErro
@@ -268,7 +268,8 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
             adicionarMensagemErro(error.data.message,
                 geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
-        })
+
+        }).finally(() => blockUI.stop())
     }
 
     function copiarTabelaClipboard() {

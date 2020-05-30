@@ -1,7 +1,7 @@
 const path = require('path')
 const Param = require('../models/param')
 
-const { Parser, transforms: { unwind }  } = require('json2csv')
+const { Parser } = require('json2csv');
 
 const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
 
@@ -46,56 +46,48 @@ module.exports = function (app) {
                 mostrarCommitsLocais: req.body.mostrarCommitsLocais
             })
 
-            // https://stackoverflow.com/questions/20620771/how-to-parse-json-object-to-csv-file-using-json2csv-nodejs-module
-
-            const listaSaida = [
+            const fields = [
                 {
-                    "carModel": "BMW",
-                    "price": 15000,
-                    "items": [
-                        {
-                            "name": "airbag",
-                            "color": "white"
-                        }, {
-                            "name": "dashboard",
-                            "color": "black"
-                        }
-                    ]
-                }, {
-                    "carModel": "Porsche",
-                    "price": 30000,
-                    "items": [
-                        {
-                            "name": "airbag",
-                            "items": [
-                                {
-                                    "position": "left",
-                                    "color": "white"
-                                }, {
-                                    "position": "right",
-                                    "color": "gray"
-                                }
-                            ]
-                        }, {
-                            "name": "dashboard",
-                            "items": [
-                                {
-                                    "position": "left",
-                                    "color": "gray"
-                                }, {
-                                    "position": "right",
-                                    "color": "black"
-                                }
-                            ]
-                        }
-                    ]
+                    label: 'Número de Alterações',
+                    value: 'numeroAlteracao'
+                },
+                {
+                    label: 'Nome dos artefatos',
+                    value: 'listaNomeArtefato'
+                },
+                {
+                    label: 'O que será feito',
+                    value: 'numeroTarefa'
                 }
             ];
 
-            const fields = ['carModel', 'price', 'items.name', 'items.color', 'items.items.position', 'items.items.color'];
-            const transforms = [unwind({ paths: ['items', 'items.items'] })];
-            const json2csvParser = new Parser({ fields, transforms });
-            const csv = json2csvParser.parse(listaSaida);
+            const gerador = obterTipoGerador(req.body.tipoListagem, params)
+            const listaSaida = await gerador.gerarListaArtefato()
+
+            const listaSaidaCVS = listaSaida.reduce((listaRetorno, saida) => {
+
+                const obj = {}
+
+                // TODO - Colocar num util da vida
+                if (saida.listaNumeroTarefaSaida.length === 1)
+                    obj.numeroTarefa = `Tarefa nº ${saida.listaNumeroTarefaSaida[0]}`
+                else if (saida.listaNumeroTarefaSaida.length > 1) {
+                    obj.numeroTarefa = `Tarefas nº ${saida.listaNumeroTarefaSaida.join(', ')}`
+                }
+
+                obj.numeroAlteracao = saida.listaArtefatoSaida.length
+
+                obj.listaNomeArtefato = saida.listaArtefatoSaida.map(artefato =>  
+                    artefato.nomeArtefato
+                ).join('\n')
+
+                listaRetorno.push(obj)
+
+                return listaRetorno
+            },[])
+
+            const json2csvParser = new Parser({ fields });
+            const csv = json2csvParser.parse(listaSaidaCVS);
 
             resp.json(csv)
 
