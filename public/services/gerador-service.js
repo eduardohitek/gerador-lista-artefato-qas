@@ -11,7 +11,8 @@ function geradorService($http) {
 
     const service = {
         gerarListaArtefato: gerarListaArtefato,
-        listarDiretorio: listarDiretorio
+        listarDiretorio: listarDiretorio,
+        obterListaArtefatoCsv: obterListaArtefatoCsv
     }
 
     function gerarListaArtefato(req) {
@@ -31,6 +32,16 @@ function geradorService($http) {
             data: req
         })
     }
+
+    function obterListaArtefatoCsv(req) {
+
+        return $http({
+            method: 'POST',
+            url: `http://${HOST}:${PORT}/obterListaArtefatoCsv`,
+            data: req
+        })
+    }
+
 
     return service
 }

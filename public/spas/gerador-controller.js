@@ -259,8 +259,25 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         //     geradorConstants.TIPO_POSICAO_ALERT.TOP)
         // })
 
-        var data = new Blob(['Hey ho lets go!'], { type: 'text/plain;charset=utf-8' });
-        FileSaver.saveAs(data, 'text.txt');
+        geradorService.obterListaArtefatoCsv(vm.req)
+        .then((resposta) => {
+
+            if (vm.listaSaida.length) {
+
+                var data = new Blob([resposta.data], { type: 'text/csv;charset=utf-8' })
+                FileSaver.saveAs(data, 'asdf.csv')
+
+                adicionarMensagemSucesso('Dados da tabela exportados', geradorConstants.TIPO_POSICAO_ALERT.TOP)
+
+            } else 
+                adicionarMensagemErro
+                    ('Nenhum resultado encontrado', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+
+        }).catch((error) => {
+
+            adicionarMensagemErro(error.data.message,
+                geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+        })
     }
 
     function download(api, file, contentType) {

@@ -1,6 +1,8 @@
 const path = require('path')
 const Param = require('../models/param')
 
+const { parse } = require('json2csv');
+
 const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
 
 module.exports = function (app) {
@@ -24,6 +26,32 @@ module.exports = function (app) {
             const listaSaida = await gerador.gerarListaArtefato()
 
             resp.json(listaSaida)
+
+        } catch (error) {
+
+            resp.status(BAD_REQUEST_CODE).send({ message: error.message })
+        }
+    })
+
+    app.post('/obterListaArtefatoCsv', async function (req, resp) {
+
+        try {
+            const params = new Param({
+                autor: req.body.autor,
+                listaTarefa: req.body.listaTarefa,
+                listaProjeto: req.body.listaProjeto,
+                mostrarDeletados: req.body.mostrarDeletados,
+                mostrarRenomeados: req.body.mostrarRenomeados,
+                mostrarNumModificacao: req.body.mostrarNumModificacao,
+                mostrarCommitsLocais: req.body.mostrarCommitsLocais
+            })
+
+            const gerador = obterTipoGerador(req.body.tipoListagem, params)
+            const listaSaida = await gerador.gerarListaArtefato()
+
+            const csv = parse(listaSaida, []);
+
+            resp.json(csv)
 
         } catch (error) {
 

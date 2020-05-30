@@ -18,7 +18,10 @@ app.use('/js/lib/angular-block-ui.min.js', express.static(path.join(__dirname, '
 app.use('/js/lib/ng-device-detector.min.js', express.static(path.join(__dirname, '../node_modules/ng-device-detector/ng-device-detector.min.js')))
 app.use('/js/lib/ua-device-detector.min.js', express.static(path.join(__dirname, '../node_modules/ua-device-detector/ua-device-detector.min.js')))
 app.use('/js/lib/re-tree.min.js', express.static(path.join(__dirname, '../node_modules/re-tree/re-tree.min.js')))
+
 app.use('/js/lib/angular-file-saver.bundle.min.js', express.static(path.join(__dirname, '../node_modules/angular-file-saver/dist/angular-file-saver.bundle.min.js')))
+app.use('/js/lib/angular-sanitize.min.js', express.static(path.join(__dirname, '../node_modules/angular-sanitize/angular-sanitize.min.js')))
+app.use('/js/lib/ng-csv.min.js', express.static(path.join(__dirname, '../node_modules/ng-csv/build/ng-csv.min.js')))
 
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json())
