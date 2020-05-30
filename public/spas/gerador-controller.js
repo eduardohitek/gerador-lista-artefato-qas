@@ -2,9 +2,9 @@ angular
     .module('geradorApp')
     .controller('GeradorController', GeradorController)
 
-GeradorController.$inject = ['geradorService', 'blockUI', 'clipboardUtil', 'geradorConstants', 'deviceDetector'];
+GeradorController.$inject = ['FileSaver', 'Blob', 'geradorService', 'blockUI', 'clipboardUtil', 'geradorConstants', 'deviceDetector'];
 
-function GeradorController(geradorService, blockUI, clipboardUtil, geradorConstants, deviceDetector) {
+function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUtil, geradorConstants, deviceDetector) {
     var vm = this
 
     vm.listaSaida = []
@@ -26,7 +26,7 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
     vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
-    vm.copiarTabelaPlainTextClipboard = copiarTabelaPlainTextClipboard
+    vm.exportarTabelaCsv = exportarTabelaCsv
     vm.copiarTabelaClipboard = copiarTabelaClipboard
 
     async function init() {
@@ -246,14 +246,47 @@ function GeradorController(geradorService, blockUI, clipboardUtil, geradorConsta
             : artefato.nomeArtefato
     }
 
-    function copiarTabelaPlainTextClipboard() {
+    function exportarTabelaCsv() {
 
         limparMessages()
 
-        clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
+        // https://github.com/alferov/angular-file-saver
+        // https://stackoverflow.com/questions/48699963/download-csv-format-using-angularjs
 
-        adicionarMensagemSucesso('Dados da tabela copiados para o clipboard',
-            geradorConstants.TIPO_POSICAO_ALERT.TOP)
+        // download().then(()=> {
+
+        //     adicionarMensagemSucesso('Dados da tabela exportados',
+        //     geradorConstants.TIPO_POSICAO_ALERT.TOP)
+        // })
+
+        var data = new Blob(['Hey ho lets go!'], { type: 'text/plain;charset=utf-8' });
+        FileSaver.saveAs(data, 'text.txt');
+    }
+
+    function download(api, file, contentType) {
+
+        var d = $q.defer();
+        $http({
+            method: 'GET',
+            url: api,
+            responseType: 'arraybuffer',
+            headers: {
+                'Content-type': contentType
+            }
+        }).success(function(response) {
+
+            var data = new Blob([response], {
+                type: contentType+ ';charset=utf-8'
+            });
+
+            FileSaver.saveAs(data, file);
+            d.resolve(response);
+
+        }).error(function(response) {
+            d.reject(response);
+        });
+
+        return d.promise;
     }
 
     function copiarTabelaClipboard() {
