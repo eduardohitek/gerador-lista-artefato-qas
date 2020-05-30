@@ -271,32 +271,6 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         })
     }
 
-    function download(api, file, contentType) {
-
-        var d = $q.defer();
-        $http({
-            method: 'GET',
-            url: api,
-            responseType: 'arraybuffer',
-            headers: {
-                'Content-type': contentType
-            }
-        }).success(function(response) {
-
-            var data = new Blob([response], {
-                type: contentType+ ';charset=utf-8'
-            });
-
-            FileSaver.saveAs(data, file);
-            d.resolve(response);
-
-        }).error(function(response) {
-            d.reject(response);
-        });
-
-        return d.promise;
-    }
-
     function copiarTabelaClipboard() {
 
         limparMessages()
