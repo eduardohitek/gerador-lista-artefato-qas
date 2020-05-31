@@ -24,11 +24,8 @@ module.exports = function (app) {
                 mostrarCommitsLocais: req.body.mostrarCommitsLocais
             })
 
-            // const gerador = obterTipoGerador(req.body.tipoListagem, params)
-            // const listaSaida = await gerador.gerarListaArtefato()
-
-            const gerador = new GeradorOfManagerClass(params)
-            const listaSaida = await gerador.gerarListaArtefato();
+            const gerador = obterTipoGerador(req.body.tipoListagem, params)
+            const listaSaida = await gerador.gerarListaArtefato()
 
             resp.json(listaSaida)
 
@@ -87,6 +84,6 @@ module.exports = function (app) {
         if (tipoListagem == TIPO_LISTAGEM.QAS)
             return require('../lib/gerador-qas')(params)
 
-        return require('../lib/gerador-ofmanager')(params)
+        return new GeradorOfManagerClass(params)
     }
 }
