@@ -3,7 +3,7 @@ const GeradorTestUtil = require('./gerador-test-util')
 
 const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 
-const GeradorOfManagerClass = require('../lib/gerador-ofmanager-class')
+const GeradorOfManagerClass = require('../lib/gerador-ofmanager')
 
 const nomeProjeto = 'foo'
 const autor = 'fulano'

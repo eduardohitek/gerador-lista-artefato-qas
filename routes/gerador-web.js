@@ -3,7 +3,7 @@ const Param = require('../models/param')
 
 const geradorCvs = require('../lib/gerador-cvs')
 
-const GeradorOfManagerClass = require('../lib/gerador-ofmanager-class')
+const GeradorOfManagerClass = require('../lib/gerador-ofmanager')
 
 const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
 
