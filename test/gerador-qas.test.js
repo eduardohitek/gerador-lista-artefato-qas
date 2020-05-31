@@ -6,7 +6,7 @@ const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 const nomeProjeto = 'foo'
 const autor = 'fulano'
 
-const GeradorQas = require('../lib/gerador-qas-class')
+const GeradorQas = require('../lib/gerador-qas')
 
 describe('test gerais', () => {
 
