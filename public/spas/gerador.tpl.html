@@ -207,34 +207,41 @@
 
 			<div class='col d-flex flex-row-reverse'>
 
-				<div class='pt-3 pl-1'>
+				<div class='pt-3 pb-2 pl-2'>
 					<button class='btn btn-block btn-primary' ng-click='vm.listarArtefatos()'>Gerar Lista</button>
 				</div>
-	
-				<div class='py-3 px-1'>
+
+				<div class='pt-3 pb-2 pl-2'>
 					<button class='btn btn-block btn-danger' ng-click='vm.limparFiltros()'>Limpar</button>
-				</div>
-
-				<div class='py-3 px-1' ng-if='vm.listaSaida.length'>
-					<button class='btn btn-block btn-success' 
-						ng-click='vm.exportarArquivoCsv()'
-						title='Exportar listagem para um arquivo CSV'>Exportar para CSV</button>
-				</div>
-
-				<div class='py-3 px-1' ng-if='vm.listaSaida.length'>
-					<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'
-						ng-click='vm.exportarArquivoTxt()'
-						title='Exportar listagem para um arquivo TXT'>Exportar para TXT</button>
 				</div>
 
 			</div>
 
 		</div>
 
+		<hr class="my-2" ng-if='vm.listaSaida.length' />
+
+		<div class='row' ng-if='vm.listaSaida.length'>
+
+			<div class='col d-flex flex-row-reverse'>
+
+				<div class='py-1 pl-2' ng-if='vm.listaSaida.length'>
+					<button class='btn btn-block btn-success' ng-click='vm.exportarArquivoCsv()'
+						title='Exportar listagem para um arquivo CSV'>Exportar para CSV</button>
+				</div>
+
+				<div class='py-1 px-0' ng-if='vm.listaSaida.length'>
+					<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'
+						ng-click='vm.exportarArquivoTxt()' title='Exportar listagem para um arquivo TXT'>Exportar para
+						TXT</button>
+				</div>
+			</div>
+		</div>
+
 		<div ng-include="'spas/include/lista-artefato-ofmanager.html'"></div>
 		<div ng-include="'spas/include/lista-artefato-qas.html'"></div>
 
-		<hr class="my-2"/>
+		<hr class="my-2" />
 
 	</div>
 
