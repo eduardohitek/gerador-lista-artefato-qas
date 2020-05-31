@@ -6,13 +6,13 @@ const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 const nomeProjeto = 'foo'
 const autor = 'fulano'
 
-let gerador = {}
+const GeradorQas = require('../lib/gerador-qas-class')
 
 describe('test gerais', () => {
 
     describe('test gerais', () => {
 
-        let gitUtil, params = {}
+        let gerador, gitUtil, params = {}
 
         beforeEach(async () => {
 
@@ -30,6 +30,8 @@ describe('test gerais', () => {
                 mostrarDeletados: true,
                 mostrarRenomeados: true
             })
+
+            gerador = new GeradorQas(params)
         })
 
         it('teste do modulo Param com parametros repetidos', () => {
@@ -47,7 +49,7 @@ describe('test gerais', () => {
             expect(params.listaProjeto[0]).toBe('bar')
         })
 
-        it('teste de listagem de artefatos com projeto inválido', () => {
+        it('teste de listagem de artefatos com projeto inválido', async () => {
 
             const paramsError = new Param({
                 autor: "fulano",
@@ -55,8 +57,10 @@ describe('test gerais', () => {
                 listaTarefa: ["1111111"]
             })
 
+            const gerador = new GeradorQas(paramsError)
+
             expect.assertions(1);
-            expect(gerador(paramsError).gerarListaArtefato()).rejects.toEqual(
+            expect(gerador.gerarListaArtefato()).rejects.toEqual(
                 new Error(`Projeto ${paramsError.listaProjeto[0]} não encontrado`));
         })
 
@@ -78,7 +82,7 @@ describe('test gerais', () => {
             await gitUtil.manipularArquivoComCommit('2222222',
                 'arquivoQux.txt', TIPO_MODIFICACAO.MODIFIED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(3)
 
@@ -129,7 +133,7 @@ describe('test gerais', () => {
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(2)
 
@@ -184,7 +188,7 @@ describe('test gerais', () => {
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoFoo.txt', TIPO_MODIFICACAO.ADDED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(2)
 
@@ -219,7 +223,7 @@ describe('test gerais', () => {
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.ADDED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(2)
 
@@ -256,7 +260,7 @@ describe('test gerais', () => {
 
             params.mostrarDeletados = false
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(1)
 
@@ -281,7 +285,7 @@ describe('test gerais', () => {
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(1)
 
@@ -303,7 +307,7 @@ describe('test gerais', () => {
 
             params.mostrarDeletados = false
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(0)
         })
@@ -319,7 +323,7 @@ describe('test gerais', () => {
 
             params.mostrarDeletados = false
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(0)
         })
@@ -334,7 +338,7 @@ describe('test gerais', () => {
 
             await gitUtil.checkoutBranch('master')
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(1)
 
@@ -383,7 +387,7 @@ describe('test gerais', () => {
                 { tipoAlteracao: TIPO_MODIFICACAO.DELETED, pathArquivo: 'src/app/spas/inventario/bem-services.js' }
             ])
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(4)
 
@@ -442,7 +446,7 @@ describe('test gerais', () => {
 
             await gitUtil.stash()
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(1)
 
@@ -462,7 +466,7 @@ describe('test gerais', () => {
 
             params.mostrarCommitsLocais = false
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(0)
         })
@@ -475,7 +479,7 @@ describe('test gerais', () => {
                 { tipoAlteracao: TIPO_MODIFICACAO.MODIFIED, pathArquivo: 'src/app/spas/inventario/foo.tpl.html' }
             ])
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(3)
 
@@ -515,7 +519,7 @@ describe('test gerais', () => {
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.MODIFIED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(1)
 
@@ -542,7 +546,7 @@ describe('test gerais', () => {
             await gitUtil.manipularArquivoComCommit('1111111',
                 'arquivoBar.txt', TIPO_MODIFICACAO.DELETED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista).toHaveLength(1)
 
@@ -569,7 +573,7 @@ describe('test gerais', () => {
             await gitUtil.manipularArquivoComCommit('2222222',
                 { origem: 'bar/.gitignor', destino: 'bar/.gitignore' }, TIPO_MODIFICACAO.RENAMED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await gerador.gerarListaArtefato()
 
             expect(lista[0].listaNumeroTarefaSaida).toHaveLength(1)
             expect(lista[0].listaNumeroTarefaSaida).toEqual(expect.arrayContaining(['1111111']))
@@ -636,7 +640,7 @@ describe('test gerais', () => {
                 mostrarRenomeados: true
             })
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await new GeradorQas(params).gerarListaArtefato()
 
             expect(lista).toHaveLength(2)
 
@@ -664,7 +668,7 @@ describe('test gerais', () => {
         /* 
         node app -l QAS --diretorio=/tmp/gerador-lista-artefato-qas --projeto=abc,def,ghi --autor=fulano --task=1111111,2222222,3333333 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
-        it('teste ordenação dos artefatos dentro da tarefa', async () => {
+        xit('teste ordenação dos artefatos dentro da tarefa', async () => {
 
             const gitAbc = await new GeradorTestUtil('abc', autor)
             const gitDef = await new GeradorTestUtil('def', autor)
@@ -730,7 +734,7 @@ describe('test gerais', () => {
                 mostrarRenomeados: true
             })
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await new GeradorQas(params).gerarListaArtefato()
             // require('../lib/printer')({mostrarNumModificacao: true}, lista).imprimirListaSaida()
 
             expect(lista).toHaveLength(3)
@@ -803,7 +807,7 @@ describe('test gerais', () => {
             await gitBar.manipularArquivoComCommit('2222222',
                 { origem: 'walzz-controller.html', destino: 'yrizz-controller.html' }, TIPO_MODIFICACAO.RENAMED)
 
-            const lista = await gerador(params).gerarListaArtefato()
+            const lista = await new GeradorQas(params).gerarListaArtefato()
 
             expect(lista).toHaveLength(11)
 
