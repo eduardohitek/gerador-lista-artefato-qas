@@ -31,11 +31,28 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
     async function init() {
 
+        vm.cars = [{
+            "brand": "Audi",
+            "model": "A1"
+        }, {
+            "brand": "Audi",
+            "model": "A2"
+        }, {
+            "brand": "Audi",
+            "model": "A3"
+        }, {
+            "brand": "BMW",
+            "model": "3 Series"
+        }, {
+            "brand": "BMW",
+            "model": "5 Series"
+        }]
+
         limparMessages()
         limparFiltros()
 
         // TODO - Remover
-        vm.req.listaTarefa = ["1111111","2222222","3333333"]
+        vm.req.listaTarefa = ["1111111", "2222222", "3333333"]
         vm.req.autor = 'fulano'
 
         listarDiretorioPadrao()
@@ -253,23 +270,23 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         blockUI.start()
 
         geradorService.obterListaArtefatoCsv(vm.req)
-        .then((resposta) => {
+            .then((resposta) => {
 
-            if (resposta.data) {
+                if (resposta.data) {
 
-                var data = new Blob([resposta.data], { type: 'text/csv;charset=utf-8' })
-                FileSaver.saveAs(data, 'lista-artefato.csv')
+                    var data = new Blob([resposta.data], { type: 'text/csv;charset=utf-8' })
+                    FileSaver.saveAs(data, 'lista-artefato.csv')
 
-            } else 
-                adicionarMensagemErro
-                    ('Nenhum resultado encontrado', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+                } else
+                    adicionarMensagemErro
+                        ('Nenhum resultado encontrado', geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
-        }).catch((error) => {
+            }).catch((error) => {
 
-            adicionarMensagemErro(error.data.message,
-                geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
+                adicionarMensagemErro(error.data.message,
+                    geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
 
-        }).finally(() => blockUI.stop())
+            }).finally(() => blockUI.stop())
     }
 
     function exportarArquivoTxt() {
@@ -311,7 +328,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
             saidaTexto = saidaTexto.concat('\n')
 
             return saidaTexto
-        },'')
+        }, '')
     }
 
     function obterListaArtefato(artefato) {
@@ -320,7 +337,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
         if (artefato.tipoAlteracao === geradorConstants.TIPO_MODIFICACAO.RENAMED)
             retorno = retorno.concat(`${artefato.nomeAntigoArtefato}\t${artefato.nomeNovoArtefato}`)
-        else 
+        else
             retorno = retorno.concat(artefato.nomeArtefato)
 
         return retorno

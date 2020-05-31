@@ -12,6 +12,7 @@ app.use('/css/bootstrap.min.css', express.static(path.join(__dirname, '../node_m
 app.use('/css/angular-block-ui.min.css', express.static(path.join(__dirname, '../node_modules/angular-block-ui/dist/angular-block-ui.min.css')))
 
 app.use('/js/lib/angular.min.js', express.static(path.join(__dirname, '../node_modules/angular/angular.min.js')))
+app.use('/js/lib/angular-filter.min.js', express.static(path.join(__dirname, '../node_modules/angular-filter/dist/angular-filter.min.js')))
 app.use('/js/lib/angular-route.min.js', express.static(path.join(__dirname, '../node_modules/angular-route/angular-route.min.js')))
 app.use('/js/lib/angular-resource.min.js', express.static(path.join(__dirname, '../node_modules/angular-resource/angular-resource.min.js')))
 app.use('/js/lib/angular-block-ui.min.js', express.static(path.join(__dirname, '../node_modules/angular-block-ui/dist/angular-block-ui.min.js')))

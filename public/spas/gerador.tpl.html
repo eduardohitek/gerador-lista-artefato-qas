@@ -239,7 +239,20 @@
 		</div>
 
 		<div ng-include="'spas/include/lista-artefato-ofmanager.html'"></div>
-		<div ng-include="'spas/include/lista-artefato-qas.html'"></div>
+		<div ng-include="'spas/include/lista-artefato-qas.html'"></div> -->
+
+		<!-- https://stackoverflow.com/questions/43584033/how-to-group-by-a-property-in-an-angular-table-with-a-single-rownspan-for-this-p -->
+		<table>
+			<tbody ng-repeat="(key, value) in vm.cars | groupBy: 'brand'">
+			  <tr>
+				<td rowspan="{{value.length}}">{{key}}</td>
+				<td>{{value[0].model}}</td>
+			  </tr>
+			  <tr ng-repeat="car in value" ng-if="!$first">
+				<td>{{car.model}}</td>
+			  </tr>    
+			</tbody>
+		  </table>
 
 		<hr class="my-2" />
 
