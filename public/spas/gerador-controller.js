@@ -286,9 +286,43 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
         limparMessages()
 
-        clipboardUtil.copiarTabelaClipboard([saida])
+        const listaSaida = obterTextoListaSaida([saida])
+        clipboardUtil.copiarTabelaClipboard(listaSaida)
 
         adicionarMensagemSucesso('Dados da linha copiados para o clipboard',
             geradorConstants.TIPO_POSICAO_ALERT.TOP)
+    }
+
+    function obterTextoListaSaida(listaSaida) {
+
+        return listaSaida.reduce((saidaTexto, saida) => {
+
+            if (saida.listaNumeroTarefaSaida.length === 1)
+                saidaTexto = saidaTexto.concat(
+                    `\nTarefa nº ${saida.listaNumeroTarefaSaida[0]}\n`)
+
+            else if (saida.listaNumeroTarefaSaida.length > 1)
+                saidaTexto = saidaTexto.concat(
+                    `\nTarefas nº ${saida.listaNumeroTarefaSaida.join(', ')}\n`)
+
+            for (const artefato of saida.listaArtefatoSaida)
+                saidaTexto = saidaTexto.concat(obterListaArtefato(artefato))
+
+            saidaTexto = saidaTexto.concat('\n')
+
+            return saidaTexto
+        },'')
+    }
+
+    function obterListaArtefato(artefato) {
+
+        let retorno = `\n${artefato.tipoAlteracao}\t`
+
+        if (artefato.tipoAlteracao === geradorConstants.TIPO_MODIFICACAO.RENAMED)
+            retorno = retorno.concat(`${artefato.nomeAntigoArtefato}\t${artefato.nomeNovoArtefato}`)
+        else 
+            retorno = retorno.concat(artefato.nomeArtefato)
+
+        return retorno
     }
 }
