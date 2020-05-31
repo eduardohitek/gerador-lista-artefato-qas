@@ -26,8 +26,8 @@ function alertController() {
         if (!angular.equals(vm.alerts, alertsPrevious)) {
             for (const alert of vm.alerts) {
 
-                alert.close = () => {
-                    vm.alerts.splice(vm.alerts.indexOf(this), 1)
+                alert.close = ($index) => {
+                    vm.alerts.splice($index, 1)
                 }
             }
         }
