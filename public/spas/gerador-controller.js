@@ -26,8 +26,8 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
     vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
-    vm.exportarTabelaCsv = exportarTabelaCsv
-    vm.copiarTabelaPlainTextClipboard = copiarTabelaPlainTextClipboard
+    vm.exportarArquivoCsv = exportarArquivoCsv
+    vm.exportarArquivoTxt = exportarArquivoTxt
 
     async function init() {
 
@@ -246,7 +246,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
             : artefato.nomeArtefato
     }
 
-    function exportarTabelaCsv() {
+    function exportarArquivoCsv() {
 
         limparMessages()
 
@@ -272,22 +272,22 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         }).finally(() => blockUI.stop())
     }
 
-    function copiarTabelaPlainTextClipboard() {
+    function exportarArquivoTxt() {
 
         limparMessages()
 
-        clipboardUtil.copiarTabelaClipboard(vm.listaSaida)
+        const textoSaida = obterTextoListaSaida(vm.listaSaida)
 
-        adicionarMensagemSucesso('Dados da tabela copiados para o clipboard',
-            geradorConstants.TIPO_POSICAO_ALERT.TOP)
+        var data = new Blob([textoSaida], { type: 'text/txt;charset=utf-8' })
+        FileSaver.saveAs(data, 'lista-artefato.txt')
     }
 
     function copiarLinhaTabelaClipboard(saida) {
 
         limparMessages()
 
-        const listaSaida = obterTextoListaSaida([saida])
-        clipboardUtil.copiarTabelaClipboard(listaSaida)
+        const textoSaida = obterTextoListaSaida([saida])
+        clipboardUtil.copiarTabelaClipboard(textoSaida)
 
         adicionarMensagemSucesso('Dados da linha copiados para o clipboard',
             geradorConstants.TIPO_POSICAO_ALERT.TOP)
