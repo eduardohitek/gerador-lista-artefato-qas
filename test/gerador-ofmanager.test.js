@@ -12,7 +12,7 @@ let gitUtil, gerador = {}
 
 describe('test gerais', () => {
 
-    describe('', () => {
+    xdescribe('', () => {
 
         let gitUtil, params = {}
 
@@ -517,7 +517,7 @@ describe('test gerais', () => {
         /* 
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
-        it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
+        xit('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
             const gitQux = await new GeradorTestUtil('qux', autor)
             const gitBaz = await new GeradorTestUtil('baz', autor)
@@ -660,15 +660,15 @@ describe('test gerais', () => {
             expect(lista[1].listaArtefatoSaida[0]).toMatchObject(obterObj(TIPO_MODIFICACAO.MODIFIED, 2, 'abc/arquivoFoo.txt'))
             expect(lista[1].listaArtefatoSaida[1]).toMatchObject(obterObj(TIPO_MODIFICACAO.DELETED, 1, 'abc/arquivo-qux.css'))
 
-            gitAbc.removerDiretorioProjeto()
-            gitDef.removerDiretorioProjeto()
-            gitGhi.removerDiretorioProjeto()
+            // gitAbc.removerDiretorioProjeto()
+            // gitDef.removerDiretorioProjeto()
+            // gitGhi.removerDiretorioProjeto()
         })
 
         /*
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
         */
-        it('teste de listagem com arquivos com tipos diferentes separados', async () => {
+        xit('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
             const gitFoo = await new GeradorTestUtil('foo', autor)
             const gitBar = await new GeradorTestUtil('bar', autor)
@@ -806,9 +806,9 @@ describe('test gerais', () => {
         })
     })
 
-    afterEach(async () => {
-        (await new GeradorTestUtil('', '')).removerDiretorioTest()
-    })
+    // afterEach(async () => {
+    //     (await new GeradorTestUtil('', '')).removerDiretorioTest()
+    // })
 })
 
 function obterObj(tipoAlteracao, numeroAlteracao, nomeArtefato, nomeAntigoArtefato, nomeNovoArtefato) {
