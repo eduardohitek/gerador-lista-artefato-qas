@@ -3,6 +3,8 @@ const Param = require('../models/param')
 
 const geradorCvs = require('../lib/gerador-cvs')
 
+const GeradorOfManagerClass = require('../lib/gerador-ofmanager-class')
+
 const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
 
 module.exports = function (app) {
@@ -22,8 +24,11 @@ module.exports = function (app) {
                 mostrarCommitsLocais: req.body.mostrarCommitsLocais
             })
 
-            const gerador = obterTipoGerador(req.body.tipoListagem, params)
-            const listaSaida = await gerador.gerarListaArtefato()
+            // const gerador = obterTipoGerador(req.body.tipoListagem, params)
+            // const listaSaida = await gerador.gerarListaArtefato()
+
+            const gerador = new GeradorOfManagerClass(params)
+            const listaSaida = await gerador.gerarListaArtefato();
 
             resp.json(listaSaida)
 
