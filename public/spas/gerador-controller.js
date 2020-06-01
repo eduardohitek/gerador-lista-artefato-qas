@@ -31,55 +31,6 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
     async function init() {
 
-        vm.cars = [{
-            "brand": "Audi",
-            "model": "A1"
-        }, {
-            "brand": "Audi",
-            "model": "A2"
-        }, {
-            "brand": "Audi",
-            "model": "A3"
-        }, {
-            "brand": "BMW",
-            "model": "3 Series"
-        }, {
-            "brand": "BMW",
-            "model": "5 Series"
-        }]
-
-        vm.lista = [{
-            tarefa: '1111111',
-            listaArtefato: [
-                {
-                    tipoAlteracao: "A",
-                    nomeArtefato: "A1"
-                },
-                {
-                    tipoAlteracao: "A",
-                    nomeArtefato: "A2"
-                },
-                {
-                    tipoAlteracao: "M",
-                    nomeArtefato: "A2"
-                }
-            ]            
-        }]
-        
-        // {
-        //     tarefa: "1111111",
-        //     tipoAlteracao: 'A'
-        // }, {
-        //     tarefa: "1111111",
-        //     tipoAlteracao: 'A'
-        // }, {
-        //     tarefa: "2222222",
-        //     tipoAlteracao: 'A'
-        // }, {
-        //     tarefa: "2222222",
-        //     tipoAlteracao: 'A'
-        // }]
-
         limparMessages()
         limparFiltros()
 
