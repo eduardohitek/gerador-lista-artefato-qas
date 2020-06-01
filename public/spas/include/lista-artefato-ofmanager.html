@@ -2,46 +2,56 @@
 
     <div class='col'>
 
-		<!-- https://stackoverflow.com/questions/43584033/how-to-group-by-a-property-in-an-angular-table-with-a-single-rownspan-for-this-p -->
-		<table>
-			<tbody ng-repeat="(key, value) in vm.cars | groupBy: 'brand'">
-			  <tr>
-				<td rowspan="{{value.length}}">{{key}}</td>
-				<td>{{value[0].model}}</td>
-			  </tr>
-			  <tr ng-repeat="car in value" ng-if="!$first">
-				<td>{{car.model}}</td>
-			  </tr>    
-			</tbody>
-		  </table>
-
-        <table id='foo' class='table table-striped table-bordered table-hover'>
-            <thead>
+        <!-- https://stackoverflow.com/questions/43584033/how-to-group-by-a-property-in-an-angular-table-with-a-single-rownspan-for-this-p -->
+        <table>
+            <tbody ng-repeat="(key, value) in vm.cars | groupBy: 'brand'">
                 <tr>
-                    <th style='width:20%'>O que será feito</th>
-                    <th style='width:62%'>Nome dos Artefatos</th>
+                    <td rowspan="{{value.length}}">{{key}}</td>
+                    <td>{{value[0].model}}</td>
                 </tr>
-            </thead>
-            <tbody>
-                <tr style='cursor: pointer;'>
-
-                    <td>
-                        <div class="row">
-                            <div class='col'>
-                                <li class='list-unstyled'>
-                                    Tarefa nº 1111111
-                                </li>
-                            </div>
-                        </div>
-                    </td>
-
-                    <td>ASDF</td>
-
+                <tr ng-repeat="car in value" ng-if="!$first">
+                    <td>{{car.model}}</td>
                 </tr>
             </tbody>
         </table>
 
-        <!-- <table id='foo' class='table table-striped table-bordered table-hover'>
+        <table class='table table-striped table-bordered table-hover'>
+
+            <thead>
+                <tr>
+                    <th>Tarefa</th>
+                    <th colspan="2">Nome dos Artefatos</th>
+                </tr>
+            </thead>
+
+            <tbody ng-repeat="tarefa in vm.lista">
+
+                <tr ng-repeat="(tipoAlteracao, listaArtefatoAgrupado) in tarefa.listaArtefato | groupBy: 'tipoAlteracao'">
+
+                    <td>{{tarefa.tarefa}}</td>
+                    <td>{{tipoAlteracao}}</td>
+                    <td>
+                        <li ng-repeat='artefato in listaArtefatoAgrupado' class='list-unstyled'>
+                            {{vm.obterNomeArtefato(artefato)}}
+                        </li>
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+            <!-- <tbody ng-repeat="(key, value) in vm.lista | groupBy: 'tipoAlteracao'">
+                <tr>
+                    <td rowspan="{{value.length}}">{{key}}</td>
+                    <td>{{value[0].model}}</td>
+                </tr>
+                <tr ng-repeat="car in value" ng-if="!$first">
+                    <td>{{car.model}}</td>
+                </tr>
+            </tbody> -->
+        </table>
+
+        <!-- <table class='table table-striped table-bordered table-hover'>
             <thead>
                 <tr>
                     <th style='width:20%'>O que será feito</th>
