@@ -2,13 +2,14 @@
 
     <div class='col'>
 
-        <table class='table table-striped table-bordered table-hover'>
+        <table class='table table-striped table-bordered'>
 
             <thead>
                 <tr>
                     <th style='width:20%'>Tarefa</th>
-                    <th style='width:20%'>Tipo de Alteração</th>
+                    <th style='width:15%'>Tipo de Alteração</th>
                     <th style='width:60%'>Nome dos Artefatos</th>
+                    <th style='width:5%'></th>
                 </tr>
             </thead>
 
@@ -19,11 +20,18 @@
 
                     <td ng-if="$first" rowspan="{{saida.listaArtefatoSaida.length}}">{{saida.listaNumeroTarefaSaida[0]}}
                     </td>
+                    
                     <td>{{vm.TIPO_MODIFICACAO[tipoAlteracao]}}</td>
                     <td>
                         <li ng-repeat='artefato in listaArtefatoAgrupado' class='list-unstyled'>
                             {{vm.obterNomeArtefato(artefato)}}
                         </li>
+                    </td>
+
+                    <td ng-if="$first" rowspan="{{saida.listaArtefatoSaida.length}}">
+
+                        
+
                     </td>
 
                 </tr>
