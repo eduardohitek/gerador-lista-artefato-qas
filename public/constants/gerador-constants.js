@@ -8,10 +8,10 @@ angular
         },
 
         TIPO_MODIFICACAO: {
-            A: 'Criado',
-            M: 'Alterado',
-            R: 'Renomeado',
-            D: 'Deletado'
+            ADDED: { codigo: 'A', descricao: 'Criado' },
+            MODIFIED: { codigo: 'M', descricao: 'Alterado' },
+            RENAMED: { codigo: 'R', descricao: 'Renomeado' },
+            DELETED: { codigo: 'D', descricao: 'Deletado' }
         },
 
         TIPO_ALERTA: {
@@ -28,7 +28,11 @@ angular
 
         TIPO_DIRETORIO_PADRAO: {
             windows: 'C:/kdi/git',
-            linux: '/kdi/git',
+            linux: '/tmp',
+
+            // TODO - Remover
+            // linux: '/kdi/git',
+
             mac: '/kdi/git'
         },
     })

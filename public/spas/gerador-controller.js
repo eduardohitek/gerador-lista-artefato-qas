@@ -19,6 +19,8 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
     vm.limparFiltros = limparFiltros
 
     vm.obterNumero = obterNumero
+    vm.obterDescricaoModificacao = obterDescricaoModificacao
+
     vm.adicionarCaminhoProjeto = adicionarCaminhoProjeto
     vm.removerCaminhoProjeto = removerCaminhoProjeto
     vm.adicionarTask = adicionarTask
@@ -39,8 +41,8 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         limparFiltros()
 
         // TODO - Remover
-        // vm.req.listaTarefa = ["1111111", "2222222", "3333333"]
-        // vm.req.autor = 'fulano'
+        vm.req.listaTarefa = ["1111111", "2222222", "3333333"]
+        vm.req.autor = 'fulano'
 
         vm.listaCaminhoProjeto = geradorConstants.TIPO_DIRETORIO_PADRAO[deviceDetector.os]
     }
@@ -103,6 +105,12 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
             return saida.listaNumeroTarefaSaida.length
         else
             return saida.listaArtefatoSaida.length
+    }
+
+    function obterDescricaoModificacao(codigoModificacao) {
+
+        return Object.values(vm.TIPO_MODIFICACAO).find(
+            tipoModificacao => tipoModificacao.codigo === codigoModificacao).descricao
     }
 
     function removerTask(taskRemocao) {
@@ -219,10 +227,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
             listaProjeto: [],
             listaTarefa: [],
             mostrarDeletados: false,
-            mostrarRenomeados: false,
-
-            // TODO - Remover
-            // mostrarCommitsLocais: true
+            mostrarRenomeados: false
         }
 
         delete vm.listaSaida
@@ -315,13 +320,11 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
     function obterListaArtefatoOfManager(artefato) {
 
-        // TODO - mudar para a constante
-        if (artefato.tipoAlteracao !== 'R') {
+        if (artefato.tipoAlteracao !== vm.TIPO_MODIFICACAO.RENAMED.codigo) {
 
             let retorno = '\n'
             
-            // TODO - mudar para a constante
-            if(artefato.tipoAlteracao === 'A') {
+            if(artefato.tipoAlteracao === artefato.tipoAlteracao !== vm.TIPO_MODIFICACAO.ADDED.codigo) {
                 retorno = retorno.concat('+')
             }
 

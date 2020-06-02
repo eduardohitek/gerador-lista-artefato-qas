@@ -21,7 +21,7 @@
                     <td ng-if="$first" rowspan="{{saida.listaArtefatoSaida.length}}">{{saida.listaNumeroTarefaSaida[0]}}
                     </td>
                     
-                    <td>{{vm.TIPO_MODIFICACAO[tipoAlteracao]}}</td>
+                    <td>{{vm.obterDescricaoModificacao(tipoAlteracao)}}</td>
                     <td>
                         <li ng-repeat='artefato in listaArtefatoAgrupado' class='list-unstyled'>
                             {{vm.obterNomeArtefato(artefato)}}
