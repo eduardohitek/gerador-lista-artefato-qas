@@ -8,8 +8,8 @@
                 <tr>
                     <th style='width:20%'>Tarefa</th>
                     <th style='width:15%'>Tipo de Alteração</th>
-                    <th style='width:60%'>Nome dos Artefatos</th>
-                    <th style='width:5%'></th>
+                    <th style='width:55%'>Nome dos Artefatos</th>
+                    <th style='width:10%'></th>
                 </tr>
             </thead>
 
@@ -29,9 +29,7 @@
                     </td>
 
                     <td ng-if="$first" rowspan="{{saida.listaArtefatoSaida.length}}">
-
-                        
-
+                        <a href ng-click='vm.copiarLinhaTabelaClipboardOfManager(saida)'>Copiar</a>
                     </td>
 
                 </tr>

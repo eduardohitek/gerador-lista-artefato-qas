@@ -25,7 +25,11 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
     vm.removerTask = removerTask
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
+
+    // TODO Refatorar
     vm.copiarLinhaTabelaClipboard = copiarLinhaTabelaClipboard
+    vm.copiarLinhaTabelaClipboardOfManager = copiarLinhaTabelaClipboardOfManager
+
     vm.exportarArquivoCsv = exportarArquivoCsv
     vm.exportarArquivoTxt = exportarArquivoTxt
 
@@ -35,18 +39,10 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         limparFiltros()
 
         // TODO - Remover
-        vm.req.listaTarefa = ["1111111", "2222222", "3333333"]
-        vm.req.autor = 'fulano'
+        // vm.req.listaTarefa = ["1111111", "2222222", "3333333"]
+        // vm.req.autor = 'fulano'
 
-        listarDiretorioPadrao()
-    }
-
-    function listarDiretorioPadrao() {
-
-        listarDiretorio([geradorConstants.TIPO_DIRETORIO_PADRAO[deviceDetector.os]])
-            .then(({ data }) => {
-                vm.req.listaProjeto = data
-            })
+        vm.listaCaminhoProjeto = geradorConstants.TIPO_DIRETORIO_PADRAO[deviceDetector.os]
     }
 
     function listarDiretorio(listaDiretorio) {
@@ -226,7 +222,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
             mostrarRenomeados: false,
 
             // TODO - Remover
-            mostrarCommitsLocais: true
+            // mostrarCommitsLocais: true
         }
 
         delete vm.listaSaida
@@ -293,6 +289,48 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
             geradorConstants.TIPO_POSICAO_ALERT.TOP)
     }
 
+    function copiarLinhaTabelaClipboardOfManager(saida) {
+
+        limparMessages()
+
+        const textoSaida = obterTextoListaSaidaOfManager([saida])
+        clipboardUtil.copiarTabelaClipboard(textoSaida)
+
+        adicionarMensagemSucesso('Dados da linha copiados para o clipboard',
+            geradorConstants.TIPO_POSICAO_ALERT.TOP)
+    }
+
+    function obterTextoListaSaidaOfManager(listaSaida) {
+
+        return listaSaida.reduce((saidaTexto, saida) => {
+
+            for (const artefato of saida.listaArtefatoSaida)
+                saidaTexto = saidaTexto.concat(obterListaArtefatoOfManager(artefato))
+
+            saidaTexto = saidaTexto.concat('\n')
+
+            return saidaTexto
+        }, '')
+    }
+
+    function obterListaArtefatoOfManager(artefato) {
+
+        // TODO - mudar para a constante
+        if (artefato.tipoAlteracao !== 'R') {
+
+            let retorno = '\n'
+            
+            // TODO - mudar para a constante
+            if(artefato.tipoAlteracao === 'A') {
+                retorno = retorno.concat('+')
+            }
+
+            retorno = retorno.concat(artefato.nomeArtefato)
+
+            return retorno
+        }
+    }
+
     function obterTextoListaSaida(listaSaida) {
 
         return listaSaida.reduce((saidaTexto, saida) => {
@@ -318,7 +356,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
         let retorno = `\n${artefato.tipoAlteracao}\t`
 
-        if (artefato.tipoAlteracao === geradorConstants.TIPO_MODIFICACAO.RENAMED)
+        if (artefato.tipoAlteracao === geradorConstants.TIPO_MODIFICACAO.R)
             retorno = retorno.concat(`${artefato.nomeAntigoArtefato}\t${artefato.nomeNovoArtefato}`)
         else
             retorno = retorno.concat(artefato.nomeArtefato)
