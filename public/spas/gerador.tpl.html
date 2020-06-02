@@ -226,14 +226,14 @@
 			<div class='col d-flex flex-row-reverse'>
 
 				<div class='py-1 pl-2' ng-if='vm.listaSaida.length'>
-					<button class='btn btn-block btn-success' ng-click='vm.exportarArquivoCsv()'
-						title='Exportar listagem para um arquivo CSV'>Exportar para CSV</button>
-				</div>
-
-				<div class='py-1 px-0' ng-if='vm.listaSaida.length'>
 					<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'
 						ng-click='vm.exportarArquivoTxt()' title='Exportar listagem para um arquivo TXT'>Exportar para
 						TXT</button>
+				</div>
+
+				<div class='py-1 px-0' ng-if='vm.listaSaida.length && vm.req.tipoListagem === vm.TIPO_LISTAGEM.QAS'>
+					<button class='btn btn-block btn-success' ng-click='vm.exportarArquivoCsv()'
+						title='Exportar listagem para um arquivo CSV'>Exportar para CSV</button>
 				</div>
 			</div>
 		</div>
