@@ -48,7 +48,9 @@ module.exports = function (app) {
                 mostrarDeletados: req.body.mostrarDeletados,
                 mostrarRenomeados: req.body.mostrarRenomeados,
                 mostrarNumModificacao: req.body.mostrarNumModificacao,
-                mostrarCommitsLocais: req.body.mostrarCommitsLocais
+
+                // TODO - Modificar pra false
+                mostrarCommitsLocais: true
             })
 
             const gerador = obterTipoGerador(req.body.tipoListagem, params)
