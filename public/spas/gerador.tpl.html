@@ -7,7 +7,14 @@
 
 	<div class='container' style='padding-right: 0px; padding-left:0px;'>
 
-		<alert alerts='vm.alerts'></alert>
+		<div ng-repeat='alert in vm.alerts'>
+
+			<div class="{{alert.tipo.class}} {{alert.tipoAlerta.class}}">
+				<a href="#" class="close" data-dismiss="alert" ng-click="vm.close($index)">&times;</a>
+				{{alert.tipoAlerta.icone}} {{alert.text}}
+			</div>
+		
+		</div>
 
 		<div class='row'>
 

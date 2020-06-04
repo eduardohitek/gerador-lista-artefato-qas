@@ -27,12 +27,11 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
     vm.removerTask = removerTask
     vm.obterNomeProjeto = obterNomeProjeto
     vm.obterNomeArtefato = obterNomeArtefato
-
     vm.copiarLinhaClipboardOfManager = copiarLinhaClipboardOfManager
     vm.copiarLinhaClipboardQas = copiarLinhaClipboardQas
-
     vm.exportarArquivoCsv = exportarArquivoCsv
     vm.exportarArquivoTxt = exportarArquivoTxt
+    vm.close = close
 
     async function init() {
 
@@ -342,7 +341,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
         return listaArtefato.reduce((saidaTexto, artefato) => {
 
-            if (artefato.tipoAlteracao !== vm.TIPO_MODIFICACAO.RENAMED.codigo && 
+            if (artefato.tipoAlteracao !== vm.TIPO_MODIFICACAO.RENAMED.codigo &&
                 artefato.tipoAlteracao !== vm.TIPO_MODIFICACAO.DELETED.codigo) {
 
                 saidaTexto = saidaTexto.concat('\n')
@@ -370,5 +369,9 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
 
             return saidaTexto
         }, '')
+    }
+
+    function close($index) {
+        vm.alerts.splice($index, 1)
     }
 }
