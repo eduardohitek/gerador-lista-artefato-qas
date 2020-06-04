@@ -41,6 +41,7 @@
     "json2csv": "^5.0.1",
     "ng-device-detector": "^5.1.4",
     "open": "^7.0.2",
+    "open-iconic": "^1.1.1",
     "re-tree": "^0.1.7",
     "ua-device-detector": "^1.1.8"
   },

@@ -2,18 +2,18 @@
 
     <div class='col'>
 
-        <table class='table table-striped table-bordered table-hover'>
+        <table class='table table-striped table-bordered'>
             <thead>
                 <tr>
                     <th style='width:11%' class='text-right'>Atividade</th>
                     <th style='width:7%' class='text-right'>Qtde</th>
-                    <th style='width:62%'>Nome dos Artefatos</th>
-                    <th style='width:20%'>O que será feito</th>
+                    <th style='width:52%'>Nome dos Artefatos</th>
+                    <th style='width:19%'>O que será feito</th>
+                    <th style='width:11%'></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat='saida in vm.listaSaida' style='cursor: pointer;'
-                    ng-click='vm.copiarLinhaClipboardQas(saida)'>
+                <tr ng-repeat='saida in vm.listaSaida' style='cursor: pointer;'>
 
                     <td class='text-right'>
                         <span>
@@ -43,16 +43,17 @@
                                 </li>
 
                             </div>
-                            <div class='col-3 d-flex flex-row-reverse'>
-
-                                <span class="clipboard" title='Copiar linha'>
-                                    <img style="width: 0.9em; height: 0.9em; opacity: .5;"
-                                        src="images/clipboard.svg">
-                                </span>
-
-                            </div>
 
                         </div>
+                    </td>
+
+                    <td>
+                        
+                        <button class='btn btn-outline-success' ng-click='vm.copiarLinhaClipboardQas(saida)'
+                            title="Copiar a listagem da tarefa para o clipboard">
+                            <i class="oi oi-clipboard"></i> Copiar
+                        </button>
+
                     </td>
 
                 </tr>

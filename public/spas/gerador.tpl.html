@@ -97,7 +97,11 @@
 							maxlength='300' number-only-and-comma>
 
 						<div class='input-group-append'>
-							<button class='btn btn-primary' ng-click='vm.adicionarTask()'>Adicionar</button>
+
+							<button class='btn btn-primary' ng-click='vm.adicionarTask()'>
+								<i class="oi oi-plus"></i> Adicionar
+							</button>
+
 						</div>
 					</div>
 
@@ -118,8 +122,11 @@
 							ng-model='vm.listaCaminhoProjeto' maxlength='300'>
 
 						<div class='input-group-append'>
-							<button class='btn btn-primary' type='button'
-								ng-click='vm.adicionarCaminhoProjeto()'>Adicionar</button>
+
+							<button class='btn btn-primary' ng-click='vm.adicionarCaminhoProjeto()'>
+								<i class="oi oi-plus"></i> Adicionar
+							</button>
+
 						</div>
 					</div>
 
@@ -153,9 +160,14 @@
 							</tr>
 
 							<tr ng-repeat='task in vm.req.listaTarefa track by $index'>
-								<td style='width:80%'>{{task}}</td>
-								<td style='width:20%'>
-									<a href ng-click='vm.removerTask(task)'>Remover</a>
+								<td style='width:75%'>{{task}}</td>
+								<td style='width:25%'>
+
+									<div class="d-flex justify-content-center">
+										<a href class="text-danger" ng-click='vm.removerTask(task)'><i
+												class="oi oi-trash"></i> Remover</a>
+									</div>
+
 								</td>
 							</tr>
 						</tbody>
@@ -187,13 +199,18 @@
 							</tr>
 
 							<tr ng-repeat='caminhoProjeto in vm.req.listaProjeto track by $index'>
-								<td style='width:80%' title='{{caminhoProjeto}}'>
+								<td style='width:75%' title='{{caminhoProjeto}}'>
 									<span>
 										.../{{vm.obterNomeProjeto(caminhoProjeto)}}
 									</span>
 								</td>
-								<td style='width:20%'>
-									<a href ng-click='vm.removerCaminhoProjeto(caminhoProjeto)'>Remover</a>
+								<td style='width:25%'>
+
+									<div class="d-flex justify-content-center">
+										<a href class="text-danger" ng-click='vm.removerCaminhoProjeto(caminhoProjeto)'><i
+												class="oi oi-trash"></i> Remover</a>
+									</div>
+
 								</td>
 							</tr>
 						</tbody>
@@ -208,11 +225,17 @@
 			<div class='col d-flex flex-row-reverse'>
 
 				<div class='pt-3 pb-2 pl-2'>
-					<button class='btn btn-block btn-primary' ng-click='vm.listarArtefatos()'>Gerar Lista</button>
+
+					<button class='btn btn-block btn-primary' ng-click='vm.listarArtefatos()'>
+						<i class="oi oi-check"></i> Gerar Lista
+					</button>
+
 				</div>
 
 				<div class='pt-3 pb-2 pl-2'>
-					<button class='btn btn-block btn-danger' ng-click='vm.limparFiltros()'>Limpar</button>
+					<button class='btn btn-block btn-danger' ng-click='vm.limparFiltros()'>
+						<i class="oi oi-trash"></i> Limpar</a>
+					</button>
 				</div>
 
 			</div>
@@ -226,14 +249,19 @@
 			<div class='col d-flex flex-row-reverse'>
 
 				<div class='py-1 pl-2' ng-if='vm.listaSaida.length'>
+
 					<button class='btn btn-block btn-success' ng-if='vm.listaSaida.length'
-						ng-click='vm.exportarArquivoTxt()' title='Exportar listagem para um arquivo TXT'>Exportar para
-						TXT</button>
+						ng-click='vm.exportarArquivoTxt()' title='Exportar listagem para um arquivo TXT'>
+						<i class="oi oi-file"></i> Exportar para TXT
+					</button>
+
 				</div>
 
 				<div class='py-1 px-0' ng-if='vm.listaSaida.length && vm.req.tipoListagem === vm.TIPO_LISTAGEM.QAS'>
 					<button class='btn btn-block btn-success' ng-click='vm.exportarArquivoCsv()'
-						title='Exportar listagem para um arquivo CSV'>Exportar para CSV</button>
+						title='Exportar listagem para um arquivo CSV'>
+						<i class="oi oi-file"></i> Exportar para CSV
+					</button>
 				</div>
 			</div>
 		</div>
