@@ -10,7 +10,9 @@ app.use(express.static(path.join(__dirname, '../public')))
 
 app.use('/css/bootstrap.min.css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css/bootstrap.min.css')))
 app.use('/css/angular-block-ui.min.css', express.static(path.join(__dirname, '../node_modules/angular-block-ui/dist/angular-block-ui.min.css')))
-app.use('/css/angular-block-ui.min.css', express.static(path.join(__dirname, '../node_modules/angular-block-ui/dist/angular-block-ui.min.css')))
+app.use('/css/open-iconic-bootstrap.min.css', express.static(path.join(__dirname, '../node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css')))
+
+app.use('/fonts/open-iconic.woff', express.static(path.join(__dirname, '../node_modules/open-iconic/font/fonts/open-iconic.woff')))
 
 app.use('/js/lib/angular.min.js', express.static(path.join(__dirname, '../node_modules/angular/angular.min.js')))
 app.use('/js/lib/angular-filter.min.js', express.static(path.join(__dirname, '../node_modules/angular-filter/dist/angular-filter.min.js')))

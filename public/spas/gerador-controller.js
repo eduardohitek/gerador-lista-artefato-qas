@@ -292,7 +292,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         clipboardUtil.copiarTabelaClipboard(textoSaida)
 
         adicionarMensagemSucesso('Dados da linha copiados para o clipboard',
-            geradorConstants.TIPO_POSICAO_ALERT.TOP)
+            geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
     }
 
     function copiarLinhaClipboardQas(saida) {
@@ -304,7 +304,7 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         clipboardUtil.copiarTabelaClipboard(textoSaida)
 
         adicionarMensagemSucesso('Dados da linha copiados para o clipboard',
-            geradorConstants.TIPO_POSICAO_ALERT.TOP)
+            geradorConstants.TIPO_POSICAO_ALERT.DEFAULT)
     }
 
     function obterTextoListaSaidaOfManager(listaSaida) {
