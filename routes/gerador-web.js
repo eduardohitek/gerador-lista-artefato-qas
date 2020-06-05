@@ -22,9 +22,7 @@ module.exports = function (app) {
                 mostrarDeletados: req.body.mostrarDeletados,
                 mostrarRenomeados: req.body.mostrarRenomeados,
                 mostrarNumModificacao: req.body.mostrarNumModificacao,
-
-                // TODO - Modificar pra false
-                mostrarCommitsLocais: true
+                mostrarCommitsLocais: false
             })
 
             const gerador = obterTipoGerador(req.body.tipoListagem, params)
@@ -48,9 +46,7 @@ module.exports = function (app) {
                 mostrarDeletados: req.body.mostrarDeletados,
                 mostrarRenomeados: req.body.mostrarRenomeados,
                 mostrarNumModificacao: req.body.mostrarNumModificacao,
-
-                // TODO - Modificar pra false
-                mostrarCommitsLocais: true
+                mostrarCommitsLocais: false
             })
 
             const gerador = obterTipoGerador(req.body.tipoListagem, params)

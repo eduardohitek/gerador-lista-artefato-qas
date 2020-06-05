@@ -24,15 +24,9 @@ angular
             TOP: { class: 'alert alert-dismissible container alert-top' },
         },
 
-        TIMEOUT_ALERTA: 4000,
-
         TIPO_DIRETORIO_PADRAO: {
             windows: 'C:/kdi/git',
-            linux: '/tmp',
-
-            // TODO - Remover
-            // linux: '/kdi/git',
-
+            linux: '/kdi/git',
             mac: '/kdi/git'
         },
     })

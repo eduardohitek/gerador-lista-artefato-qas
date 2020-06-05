@@ -38,11 +38,8 @@ function GeradorController(FileSaver, Blob, geradorService, blockUI, clipboardUt
         limparMessages()
         limparFiltros()
 
-        // TODO - Remover
-        vm.req.listaTarefa = ["1111111", "2222222", "3333333"]
-        vm.req.autor = 'fulano'
-
-        vm.listaCaminhoProjeto = geradorConstants.TIPO_DIRETORIO_PADRAO[deviceDetector.os]
+        vm.listaCaminhoProjeto = 
+            geradorConstants.TIPO_DIRETORIO_PADRAO[deviceDetector.os]
     }
 
     function listarDiretorio(listaDiretorio) {
