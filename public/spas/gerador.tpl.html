@@ -101,11 +101,12 @@
 
 						<input type='text' class='form-control'
 							placeholder='Adicione uma ou mais tarefas separadas por vírgula' ng-model='vm.listaTarefa'
+							ng-keyup='$event.keyCode == 13 ? vm.adicionarTask() : null'
 							maxlength='300' number-only-and-comma>
 
 						<div class='input-group-append'>
 
-							<button type="button" class='btn btn-primary' ng-click='vm.adicionarTask()'>
+							<button class='btn btn-primary' ng-click='vm.adicionarTask()'>
 								<i class="oi oi-plus"></i> Adicionar
 							</button>
 
@@ -126,6 +127,7 @@
 						<input type='text' class='form-control'
 							placeholder='Adic. um ou mais caminhos separados por vírgula ex. /kdi/git, /kdi/git/foo-api'
 							title='Adicione um ou mais caminhos separados por vírgula ex. /kdi/git, /kdi/git/foo-api'
+							ng-keyup='$event.keyCode == 13 ? vm.adicionarCaminhoProjeto() : null'
 							ng-model='vm.listaCaminhoProjeto' maxlength='300'>
 
 						<div class='input-group-append'>
