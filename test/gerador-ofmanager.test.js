@@ -3,16 +3,16 @@ const GeradorTestUtil = require('./gerador-test-util')
 
 const TIPO_MODIFICACAO = require('../lib/constants').TIPO_MODIFICACAO
 
-const GeradorOfManagerClass = require('../lib/gerador-ofmanager')
+const GeradorOfManager = require('../lib/gerador-ofmanager')
 
 const nomeProjeto = 'foo'
 const autor = 'fulano'
 
-let gitUtil, gerador = {}
+let gerador = {}
 
 describe('test gerais', () => {
 
-    xdescribe('', () => {
+    describe('', () => {
 
         let gitUtil, params = {}
 
@@ -32,7 +32,7 @@ describe('test gerais', () => {
                 mostrarRenomeados: true
             })
 
-            gerador = new GeradorOfManagerClass(params)
+            gerador = new GeradorOfManager(params)
         })
 
         it('teste de listagem de artefatos renomeados', async () => {
@@ -517,7 +517,7 @@ describe('test gerais', () => {
         /* 
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=qux,baz --autor=fulano --task=1111111 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais
         */
-        xit('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
+        it('teste separar arquivos de projetos diferentes em linhas diferentes', async () => {
 
             const gitQux = await new GeradorTestUtil('qux', autor)
             const gitBaz = await new GeradorTestUtil('baz', autor)
@@ -538,7 +538,7 @@ describe('test gerais', () => {
                 mostrarRenomeados: true
             })
 
-            const lista = await new GeradorOfManagerClass(params).gerarListaArtefato()
+            const lista = await new GeradorOfManager(params).gerarListaArtefato()
 
             expect(lista).toHaveLength(1)
 
@@ -623,7 +623,7 @@ describe('test gerais', () => {
                 mostrarRenomeados: true
             })
 
-            const lista = await new GeradorOfManagerClass(params).gerarListaArtefato()
+            const lista = await new GeradorOfManager(params).gerarListaArtefato()
 
             expect(lista).toHaveLength(2)
 
@@ -660,15 +660,15 @@ describe('test gerais', () => {
             expect(lista[1].listaArtefatoSaida[0]).toMatchObject(obterObj(TIPO_MODIFICACAO.MODIFIED, 2, 'abc/arquivoFoo.txt'))
             expect(lista[1].listaArtefatoSaida[1]).toMatchObject(obterObj(TIPO_MODIFICACAO.DELETED, 1, 'abc/arquivo-qux.css'))
 
-            // gitAbc.removerDiretorioProjeto()
-            // gitDef.removerDiretorioProjeto()
-            // gitGhi.removerDiretorioProjeto()
+            gitAbc.removerDiretorioProjeto()
+            gitDef.removerDiretorioProjeto()
+            gitGhi.removerDiretorioProjeto()
         })
 
         /*
         node app --diretorio=/tmp/gerador-lista-artefato-qas --projeto=foo,bar --autor=fulano --task=1111111,2222222 --mostrar-num-modificacao --mostrar-deletados --mostrar-commits-locais --mostrar-renomeados
         */
-        xit('teste de listagem com arquivos com tipos diferentes separados', async () => {
+        it('teste de listagem com arquivos com tipos diferentes separados', async () => {
 
             const gitFoo = await new GeradorTestUtil('foo', autor)
             const gitBar = await new GeradorTestUtil('bar', autor)
@@ -727,7 +727,7 @@ describe('test gerais', () => {
             await gitBar.manipularArquivoComCommit('2222222',
                 { origem: 'walzz-controller.html', destino: 'yrizz-controller.html' }, TIPO_MODIFICACAO.RENAMED)
 
-            const lista = await new GeradorOfManagerClass(params).gerarListaArtefato()
+            const lista = await new GeradorOfManager(params).gerarListaArtefato()
             // require('../lib/printer')({ mostrarNumModificacao: true }, lista).imprimirListaSaida()
 
             expect(lista).toHaveLength(2)
@@ -806,9 +806,9 @@ describe('test gerais', () => {
         })
     })
 
-    // afterEach(async () => {
-    //     (await new GeradorTestUtil('', '')).removerDiretorioTest()
-    // })
+    afterEach(async () => {
+        (await new GeradorTestUtil('', '')).removerDiretorioTest()
+    })
 })
 
 function obterObj(tipoAlteracao, numeroAlteracao, nomeArtefato, nomeAntigoArtefato, nomeNovoArtefato) {

@@ -3,7 +3,7 @@ const Param = require('../models/param')
 
 const geradorCvs = require('../lib/gerador-cvs')
 
-const GeradorOfManagerClass = require('../lib/gerador-ofmanager')
+const GeradorOfManager = require('../lib/gerador-ofmanager')
 const GeradorQas = require('../lib/gerador-qas')
 
 const TIPO_LISTAGEM = require('../lib/constants').TIPO_LISTAGEM
@@ -89,6 +89,6 @@ module.exports = function (app) {
         if (tipoListagem == TIPO_LISTAGEM.QAS)
             return new GeradorQas(params)
 
-        return new GeradorOfManagerClass(params)
+        return new GeradorOfManager(params)
     }
 }
